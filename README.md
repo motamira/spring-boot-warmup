@@ -23,6 +23,6 @@ Before venturing into this project itself it is important to have at least some 
 - Install MongoDB version 3.2. You can download it from https://www.mongodb.com/download-center#previous
 - Download and install the latest RabbitMQ. Follow the instructions here https://www.rabbitmq.com/download.html
 
-# 2 - Create your first SpringBoot application:
+# 2 - Create your first SpringBoot application
 
 - Create a simple SpringBoot project named JSUserRegistrationService that upon initialization will print the following message to the console: "Jumia Services is Awesome". You can get some documentation in Spring official website: https://projects.spring.io/spring-boot/
