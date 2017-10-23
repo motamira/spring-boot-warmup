@@ -2,13 +2,14 @@ package com.example.jsuserregistrationservice;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * Copyright (c) 2016, 2017, Jumia.
  */
 public class PersonalDetails {
 
-    @NotNull
+    @NotEmpty
     private String firstName;
 
     private String lastName;

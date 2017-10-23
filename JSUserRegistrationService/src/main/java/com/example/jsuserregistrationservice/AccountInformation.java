@@ -12,8 +12,8 @@ import org.springframework.data.mongodb.core.index.Indexed;
 public class AccountInformation {
 
     @NotNull
-    @Pattern(regexp = "^[a-z0-9_-]{4,10}$", message = "Username should be between 4 and 10 characters and contain alphanumeric characters "
-        + "and underscores only")
+    @Pattern(regexp = "^[a-z0-9]{4,10}$", message = "Username should be between 4 and 10 characters and contain alphanumeric characters "
+        + "only")
     @Indexed(unique = true)
     private String userName;
 
