@@ -2,6 +2,7 @@ package application.dto;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,6 +17,7 @@ import org.springframework.lang.Nullable;
 @AllArgsConstructor
 public class ContactsDTO {
     @Nullable
+    @Pattern(regexp = "^\\+\\d+ \\d+$")
     private String cellPhone;
 
     @NotNull

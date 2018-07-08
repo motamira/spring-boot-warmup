@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.NumberFormat;
+import org.springframework.format.annotation.NumberFormat.Style;
 import org.springframework.lang.Nullable;
 
 /**
@@ -22,6 +23,6 @@ public class PersonalDetailsDTO {
     private String lastName;
 
     @NotNull
-    @NumberFormat
+    @NumberFormat(style = Style.NUMBER)
     private String age;
 }

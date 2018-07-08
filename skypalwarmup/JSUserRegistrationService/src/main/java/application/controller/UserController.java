@@ -26,7 +26,10 @@ public class UserController {
 
     private static final Log logger = LogFactory.getLog(UserController.class);
 
-    private enum Result {
+    /**
+     * The result returned to the user after calling the registration service, includes a status code and a message.
+     */
+    public enum Result {
         CONFLICT {
             @Override
             public String getResponseBody() {
