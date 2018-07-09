@@ -1,0 +1,12 @@
+amqp:
+  host: localhost
+  port: 5672
+  username: guest
+  password: guest
+  incoming:
+    queueName: jsclient.q.dummyapp
+    exchangeName: sampleapp.et.users
+    routingKeyName: jsclient-users
+  deadletter:
+    queueName: jsclient.q.deadletter
+    exchangeName: jsclient.deadletter.exchange
