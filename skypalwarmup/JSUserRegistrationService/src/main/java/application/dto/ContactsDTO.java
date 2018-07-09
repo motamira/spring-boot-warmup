@@ -16,6 +16,7 @@ import org.springframework.lang.Nullable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ContactsDTO {
+
     @Nullable
     @Pattern(regexp = "^\\+\\d+ \\d+$")
     private String cellPhone;

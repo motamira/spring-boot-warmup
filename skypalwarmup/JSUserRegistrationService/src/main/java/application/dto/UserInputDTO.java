@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserInputDTO {
+
     @NotNull
     @Valid
     private PersonalDetailsDTO personalDetails;

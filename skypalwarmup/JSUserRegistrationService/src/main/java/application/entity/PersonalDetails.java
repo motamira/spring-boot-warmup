@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PersonalDetails {
+
     private String firstName;
     private String lastName;
     private String age;

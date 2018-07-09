@@ -16,6 +16,7 @@ import org.springframework.lang.Nullable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PersonalDetailsDTO {
+
     @NotNull
     private String firstName;
 

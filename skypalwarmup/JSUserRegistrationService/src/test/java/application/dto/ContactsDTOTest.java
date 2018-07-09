@@ -12,24 +12,25 @@ import org.junit.Test;
 /**
  * Copyright (c) 2016-2018, Jumia.
  */
+
 public class ContactsDTOTest {
 
     private static ValidatorFactory validatorFactory;
     private static Validator validator;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         validatorFactory = Validation.buildDefaultValidatorFactory();
         validator = validatorFactory.getValidator();
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         validatorFactory.close();
     }
 
     @Test
-    public void testValidEmailAccepted() throws Exception {
+    public void testValidEmailAccepted() {
         ContactsDTO inTest1 = new ContactsDTO();
         inTest1.setEmail("email@test.co.uk");
 
@@ -49,7 +50,7 @@ public class ContactsDTOTest {
     }
 
     @Test
-    public void testInvalidEmailRejected() throws Exception {
+    public void testInvalidEmailRejected() {
         ContactsDTO inTest1 = new ContactsDTO();
         inTest1.setEmail("emailtest.co.uk");
 
@@ -61,7 +62,7 @@ public class ContactsDTOTest {
     }
 
     @Test
-    public void testValidPhoneAccepted() throws Exception {
+    public void testValidPhoneAccepted() {
         ContactsDTO inTest = new ContactsDTO();
         inTest.setEmail("email@test.co.uk");
 

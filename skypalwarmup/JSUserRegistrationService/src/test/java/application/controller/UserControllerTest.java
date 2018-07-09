@@ -1,6 +1,5 @@
 package application.controller;
 
-import application.controller.UserController.Result;
 import application.dao.UserRepository;
 import application.entity.AccountInformation;
 import application.entity.Contacts;
@@ -42,14 +41,14 @@ public class UserControllerTest {
     private User userUnderTest;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
         userRepository.deleteAll();
         createUserUnderTest();
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         userRepository.deleteAll();
     }
 
@@ -83,7 +82,7 @@ public class UserControllerTest {
         this.mockMvc.perform(MockMvcRequestBuilders.post("/api/users").content(getUserValueAsJSONString())
             .contentType(MediaType.APPLICATION_JSON))
             .andExpect(MockMvcResultMatchers.status().isCreated())
-            .andExpect(MockMvcResultMatchers.content().string(Result.CREATED.getResponseBody()))
+            .andExpect(MockMvcResultMatchers.content().string(RegistrationActionResponses.CREATED.statusMessage))
             .andDo((result) -> Assert.assertTrue(userRepository.findOne(Example.of(userUnderTest)).isPresent()))
             .andReturn();
     }
@@ -95,7 +94,7 @@ public class UserControllerTest {
         this.mockMvc.perform(MockMvcRequestBuilders.post("/api/users").content(getUserValueAsJSONString())
             .contentType(MediaType.APPLICATION_JSON))
             .andExpect(MockMvcResultMatchers.status().isBadRequest())
-            .andExpect(MockMvcResultMatchers.content().string(Result.BAD_REQUEST.getResponseBody()))
+            .andExpect(MockMvcResultMatchers.content().string(RegistrationActionResponses.BAD_REQUEST.statusMessage))
             .andReturn();
         userUnderTest.getContacts().setEmail("not an email");
         userUnderTest.getContacts().setEmail(oldEmail);
@@ -107,7 +106,7 @@ public class UserControllerTest {
         this.mockMvc.perform(MockMvcRequestBuilders.post("/api/users").content(getUserValueAsJSONString())
             .contentType(MediaType.APPLICATION_JSON))
             .andExpect(MockMvcResultMatchers.status().isConflict())
-            .andExpect(MockMvcResultMatchers.content().string(Result.CONFLICT.getResponseBody()))
+            .andExpect(MockMvcResultMatchers.content().string(RegistrationActionResponses.CONFLICT.statusMessage))
             .andReturn();
     }
 }

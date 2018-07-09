@@ -16,6 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AccountInformationDTO {
+
     @NotNull
     @Size(min = 4, max = 10)
     @Pattern(regexp = "^[A-Za-z0-9]+$")

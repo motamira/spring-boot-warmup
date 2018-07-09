@@ -13,6 +13,7 @@ import org.springframework.data.mongodb.core.index.Indexed;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AccountInformation {
+
     @Indexed(unique = true)
     private String userName;
 

@@ -12,6 +12,7 @@ import org.junit.Test;
 /**
  * Copyright (c) 2016-2018, Jumia.
  */
+
 public class UserInputDTOTest {
 
     private static ValidatorFactory validatorFactory;

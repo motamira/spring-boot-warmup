@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class Application {
+
     private static final Log logger = LogFactory.getLog(Application.class);
 
     public static void main(String[] args) {
