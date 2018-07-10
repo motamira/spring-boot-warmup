@@ -21,6 +21,13 @@ public class ConsumerListener {
     @Autowired
     private RestConsumer restConsumer;
 
+    /**
+     * Handles messages received from the rabbitMq broker, first validating the message is a valid payload of type userInputDTO
+     * in case the message is not valid an exception will be thrown and message moved to the deadletter exchange.
+     *
+     * @param userInputDTO rabbitMq incoming message user information to be sent for registration
+     * @throws AmqpRejectAndDontRequeueException in case user registration was unsuccessful
+     */
     @RabbitListener(queues = "${amqp.incoming.queueName}")
     public void onMessage(@Valid @Payload UserInputDTO userInputDTO) throws AmqpRejectAndDontRequeueException {
         log.info("Received registration for: {}", userInputDTO.getAccountInformation().getUserName());

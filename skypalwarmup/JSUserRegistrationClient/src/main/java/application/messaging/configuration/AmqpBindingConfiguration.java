@@ -1,7 +1,6 @@
 package application.messaging.configuration;
 
 import application.messaging.listener.ConsumerListener;
-import application.messaging.producer.Producer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
@@ -90,10 +89,5 @@ public class AmqpBindingConfiguration {
     @Bean
     public ConsumerListener consumerListener() {
         return new ConsumerListener();
-    }
-
-    @Bean
-    public Producer producer() {
-        return new Producer();
     }
 }

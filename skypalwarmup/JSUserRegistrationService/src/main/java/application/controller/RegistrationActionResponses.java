@@ -1,6 +1,7 @@
 package application.controller;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
 /**
@@ -22,6 +23,6 @@ public enum RegistrationActionResponses {
     }
 
     public ResponseEntity<String> getResponseEntity() {
-        return ResponseEntity.status(httpStatus).body(statusMessage);
+        return ResponseEntity.status(httpStatus).contentType(MediaType.TEXT_PLAIN).body(statusMessage);
     }
 }
