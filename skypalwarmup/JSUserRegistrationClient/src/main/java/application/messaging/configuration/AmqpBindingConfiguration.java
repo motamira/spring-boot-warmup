@@ -22,7 +22,6 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class AmqpBindingConfiguration {
 
-
     @Value("${amqp.incoming.queueName}")
     String queueName;
 
