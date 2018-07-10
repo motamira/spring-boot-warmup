@@ -12,7 +12,6 @@ import org.junit.Test;
 /**
  * Copyright (c) 2016-2018, Jumia.
  */
-
 public class ContactsDTOTest {
 
     private static ValidatorFactory validatorFactory;

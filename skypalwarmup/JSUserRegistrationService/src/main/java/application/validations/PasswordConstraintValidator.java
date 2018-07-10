@@ -11,7 +11,6 @@ import org.passay.RuleResult;
 /**
  * Copyright (c) 2016-2018, Jumia.
  */
-
 public class PasswordConstraintValidator implements ConstraintValidator<ValidPassword, String> {
 
     @Override

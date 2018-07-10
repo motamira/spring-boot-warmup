@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * Copyright (c) 2016-2018, Jumia.
  */
-
 @RestController
 @RequestMapping("/api/users")
 @AllArgsConstructor

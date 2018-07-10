@@ -9,7 +9,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 /**
  * Copyright (c) 2016-2018, Jumia.
  */
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

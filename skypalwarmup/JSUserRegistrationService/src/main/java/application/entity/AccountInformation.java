@@ -8,7 +8,6 @@ import org.springframework.data.mongodb.core.index.Indexed;
 /**
  * Copyright (c) 2016-2018, Jumia.
  */
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

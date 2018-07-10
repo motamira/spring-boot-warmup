@@ -1,7 +1,7 @@
 package application.dto;
 
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,7 +11,6 @@ import org.springframework.lang.Nullable;
 /**
  * Copyright (c) 2016-2018, Jumia.
  */
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,7 +20,7 @@ public class ContactsDTO {
     @Pattern(regexp = "^\\+\\d+ \\d+$")
     private String cellPhone;
 
-    @NotNull
+    @NotBlank
     @Email
     private String email;
 }

@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 /**
  * Copyright (c) 2016-2018, Jumia.
  */
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

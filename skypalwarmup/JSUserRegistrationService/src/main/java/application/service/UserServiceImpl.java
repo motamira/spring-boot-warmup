@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 /**
  * Copyright (c) 2016-2018, Jumia.
  */
-
 @Service
 public class UserServiceImpl implements UserService {
 

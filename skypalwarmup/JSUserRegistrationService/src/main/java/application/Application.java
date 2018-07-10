@@ -8,7 +8,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
  * Copyright (c) 2016-2018, Jumia.
  */
-
 @SpringBootApplication
 public class Application {
 
