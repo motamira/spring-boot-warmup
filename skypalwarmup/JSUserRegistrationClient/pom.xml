@@ -23,7 +23,6 @@
       <version>2.0.3.RELEASE</version>
       <scope>compile</scope>
     </dependency>
-
     <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation -->
     <dependency>
       <groupId>org.springframework.boot</groupId>

@@ -4,6 +4,7 @@ import application.messaging.dto.AccountInformationDTO;
 import application.messaging.dto.ContactsDTO;
 import application.messaging.dto.PersonalDetailsDTO;
 import application.messaging.dto.UserInputDTO;
+import java.util.Random;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -29,10 +30,10 @@ public class Producer {
     @Value("${amqp.incoming.routingKeyName}")
     private String routingKeyName;
 
-    @Scheduled(fixedDelay = 1000L, initialDelay = 500L)
+    @Scheduled(fixedDelay = 5000L, initialDelay = 5000L)
     public void send() {
         AccountInformationDTO inTestAccountInformationDTO = new AccountInformationDTO();
-        inTestAccountInformationDTO.setUserName("asdfg");
+        inTestAccountInformationDTO.setUserName("asdfgasdfgasdfg" + Math.abs(new Random().nextInt(1000)));
         inTestAccountInformationDTO.setPassword("Aa1$bbb");
 
         ContactsDTO inTestContactsDTO = new ContactsDTO();
