@@ -1,11 +1,13 @@
 package application.controller;
 
+import application.entity.User;
 import application.service.UserService;
 import commons.dto.UserInputDTO;
 import javax.validation.Valid;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -19,13 +21,12 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/api/users")
-@AllArgsConstructor
+@RequiredArgsConstructor(onConstructor_ = { @Autowired })
 public class UserController {
 
     private static final Log logger = LogFactory.getLog(UserController.class);
 
-    @Autowired
-    UserService userService;
+    private final UserService userService;
 
     /**
      * @param user the user parameter dto
@@ -35,7 +36,7 @@ public class UserController {
     @PostMapping(consumes = "application/json")
     public ResponseEntity<String> register(@RequestBody @Valid UserInputDTO user, BindingResult bindingResult) {
         if (!bindingResult.hasErrors()) {
-            if (userService.register(user)) {
+            if (userService.register(mapFromUserDTO(user))) {
                 logger.info(user);
                 return RegistrationActionResponses.CREATED.getResponseEntity();
             } else {
@@ -44,5 +45,10 @@ public class UserController {
         } else {
             return RegistrationActionResponses.BAD_REQUEST.getResponseEntity();
         }
+    }
+
+    private User mapFromUserDTO(UserInputDTO userInputDTO) {
+        ModelMapper modelMapper = new ModelMapper();
+        return modelMapper.map(userInputDTO, User.class);
     }
 }

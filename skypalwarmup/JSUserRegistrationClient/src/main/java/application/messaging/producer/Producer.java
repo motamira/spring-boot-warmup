@@ -5,6 +5,7 @@ import commons.dto.ContactsDTO;
 import commons.dto.PersonalDetailsDTO;
 import commons.dto.UserInputDTO;
 import java.util.Random;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -19,13 +20,12 @@ import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
+@RequiredArgsConstructor(onConstructor_ = { @Autowired })
 public class Producer {
 
-    @Autowired
-    private RabbitTemplate rabbitTemplate;
+    private final RabbitTemplate rabbitTemplate;
 
-    @Autowired
-    private TopicExchange topicExchange;
+    private final TopicExchange topicExchange;
 
     @Value("${amqp.incoming.routingKeyName}")
     private String routingKeyName;

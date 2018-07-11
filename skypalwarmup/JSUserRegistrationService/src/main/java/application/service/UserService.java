@@ -1,11 +1,11 @@
 package application.service;
 
-import commons.dto.UserInputDTO;
+import application.entity.User;
 
 /**
  * Copyright (c) 2016-2018, Jumia.
  */
 public interface UserService {
 
-    Boolean register(UserInputDTO user);
+    Boolean register(User user);
 }
