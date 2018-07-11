@@ -1,6 +1,7 @@
-package application.dto;
+package commons.dto;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import javax.validation.Validation;
 import javax.validation.Validator;
@@ -18,18 +19,18 @@ public class PersonalDetailsDTOTest {
     private static Validator validator;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         validatorFactory = Validation.buildDefaultValidatorFactory();
         validator = validatorFactory.getValidator();
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         validatorFactory.close();
     }
 
     @Test
-    public void testFirstNameNotNull() throws Exception {
+    public void testFirstNameNotNull() {
         PersonalDetailsDTO inTest = new PersonalDetailsDTO();
         inTest.setAge("25");
 
@@ -40,7 +41,7 @@ public class PersonalDetailsDTOTest {
     }
 
     @Test
-    public void testAgeNotNull() throws Exception {
+    public void testAgeNotNull() {
         PersonalDetailsDTO inTest = new PersonalDetailsDTO();
         inTest.setFirstName("karim");
 

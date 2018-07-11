@@ -1,8 +1,9 @@
 package application.messaging.listener;
 
-import application.messaging.dto.UserInputDTO;
 import application.service.RestConsumer;
+import commons.dto.UserInputDTO;
 import javax.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.AmqpRejectAndDontRequeueException;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -16,10 +17,10 @@ import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
+@RequiredArgsConstructor(onConstructor_ = {@Autowired})
 public class ConsumerListener {
 
-    @Autowired
-    private RestConsumer restConsumer;
+    private final RestConsumer restConsumer;
 
     /**
      * Handles messages received from the rabbitMq broker, first validating the message is a valid payload of type userInputDTO

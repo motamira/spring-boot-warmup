@@ -1,6 +1,6 @@
-package application.dto;
+package commons.dto;
 
-import application.validations.ValidPassword;
+import commons.dto.validations.ValidPassword;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;

@@ -1,4 +1,4 @@
-package application.messaging.dto.validations;
+package commons.dto.validations;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -11,7 +11,6 @@ import javax.validation.Payload;
 /**
  * Copyright (c) 2016-2018, Jumia.
  */
-
 @Documented
 @Constraint(validatedBy = PasswordConstraintValidator.class)
 @Target({ElementType.TYPE, ElementType.FIELD, ElementType.ANNOTATION_TYPE})

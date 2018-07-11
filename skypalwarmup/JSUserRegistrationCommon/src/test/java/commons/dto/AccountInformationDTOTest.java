@@ -1,11 +1,11 @@
-package application.dto;
+package commons.dto;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
-import javax.validation.constraints.AssertFalse;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,18 +19,18 @@ public class AccountInformationDTOTest {
     private static Validator validator;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         validatorFactory = Validation.buildDefaultValidatorFactory();
         validator = validatorFactory.getValidator();
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         validatorFactory.close();
     }
 
     @Test
-    public void testUserNameShouldBeBetween4And10Characters() throws Exception {
+    public void testUserNameShouldBeBetween4And10Characters() {
         AccountInformationDTO inTest = new AccountInformationDTO();
         inTest.setPassword("Aa1$bbb");
 
@@ -45,7 +45,7 @@ public class AccountInformationDTOTest {
     }
 
     @Test
-    public void testValidPasswordAccepted() throws Exception {
+    public void testValidPasswordAccepted() {
         AccountInformationDTO inTest = new AccountInformationDTO();
         inTest.setUserName("asdfg");
 
@@ -60,7 +60,7 @@ public class AccountInformationDTOTest {
     }
 
     @Test
-    public void testValidPasswordRejected() throws Exception {
+    public void testValidPasswordRejected() {
         AccountInformationDTO inTest = new AccountInformationDTO();
         inTest.setUserName("asdfg");
 

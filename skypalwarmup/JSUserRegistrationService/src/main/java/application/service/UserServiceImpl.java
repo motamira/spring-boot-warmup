@@ -1,8 +1,8 @@
 package application.service;
 
 import application.dao.UserRepository;
-import application.dto.UserInputDTO;
 import application.entity.User;
+import commons.dto.UserInputDTO;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.modelmapper.ModelMapper;

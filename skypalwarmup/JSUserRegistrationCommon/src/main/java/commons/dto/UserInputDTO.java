@@ -1,4 +1,4 @@
-package application.dto;
+package commons.dto;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;

@@ -1,7 +1,7 @@
 package application.controller;
 
-import application.dto.UserInputDTO;
 import application.service.UserService;
+import commons.dto.UserInputDTO;
 import javax.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.apache.commons.logging.Log;

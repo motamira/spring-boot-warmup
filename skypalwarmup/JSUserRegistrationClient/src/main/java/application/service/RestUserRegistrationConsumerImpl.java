@@ -1,10 +1,10 @@
 package application.service;
 
-import application.messaging.dto.UserInputDTO;
+import commons.dto.UserInputDTO;
 import java.net.URI;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
@@ -17,15 +17,10 @@ import org.springframework.web.client.RestTemplate;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor(onConstructor_ = {@Autowired})
 public class RestUserRegistrationConsumerImpl implements RestConsumer {
 
-    @Autowired
-    private RestTemplate restTemplate;
-
-    @Bean
-    public RestTemplate restTemplate() {
-        return new RestTemplate();
-    }
+    private final RestTemplate restTemplate;
 
     /**
      * Create a new post request to register the user information with the

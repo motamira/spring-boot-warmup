@@ -1,6 +1,6 @@
-package application.messaging.dto;
+package commons.dto;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,19 +11,18 @@ import org.springframework.lang.Nullable;
 /**
  * Copyright (c) 2016-2018, Jumia.
  */
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class PersonalDetailsDTO {
 
-    @NotNull
+    @NotBlank
     private String firstName;
 
     @Nullable
     private String lastName;
 
-    @NotNull
+    @NotBlank
     @NumberFormat(style = Style.NUMBER)
     private String age;
 }

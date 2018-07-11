@@ -1,6 +1,6 @@
 package application.service;
 
-import application.dto.UserInputDTO;
+import commons.dto.UserInputDTO;
 
 /**
  * Copyright (c) 2016-2018, Jumia.

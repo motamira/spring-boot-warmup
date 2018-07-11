@@ -1,4 +1,4 @@
-package application.validations;
+package commons.dto.validations;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
