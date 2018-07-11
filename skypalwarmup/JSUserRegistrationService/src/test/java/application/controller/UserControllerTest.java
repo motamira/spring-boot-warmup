@@ -77,17 +77,17 @@ public class UserControllerTest {
 
     private void createUserUnderTest() {
         AccountInformation inTestAccountInformation = new AccountInformation();
-        inTestAccountInformation.setUserName(TestData.User.AccountInformation.USERNAME);
-        inTestAccountInformation.setPassword(TestData.User.AccountInformation.PASSWORD);
+        inTestAccountInformation.setUserName(TestData.USERNAME);
+        inTestAccountInformation.setPassword(TestData.PASSWORD);
 
         Contacts inTestContacts = new Contacts();
-        inTestContacts.setEmail(TestData.User.Contacts.EMAIL);
-        inTestContacts.setCellPhone(TestData.User.Contacts.PHONE);
+        inTestContacts.setEmail(TestData.EMAIL);
+        inTestContacts.setCellPhone(TestData.PHONE);
 
         PersonalDetails inTestPersonalDetails = new PersonalDetails();
-        inTestPersonalDetails.setAge(TestData.User.PersonalDetails.age);
-        inTestPersonalDetails.setFirstName(TestData.User.PersonalDetails.firstName);
-        inTestPersonalDetails.setLastName(TestData.User.PersonalDetails.lastName);
+        inTestPersonalDetails.setAge(TestData.AGE);
+        inTestPersonalDetails.setFirstName(TestData.FIRST_NAME);
+        inTestPersonalDetails.setLastName(TestData.LAST_NAME);
 
         userUnderTest = new User();
         userUnderTest.setAccountInformation(inTestAccountInformation);
@@ -113,7 +113,7 @@ public class UserControllerTest {
 
     @Test
     public void register_withInvalidEmail_returnsBadRequest() throws Exception {
-        userUnderTest.getContacts().setEmail("not an email");
+        userUnderTest.getContacts().setEmail(TestData.INVALID_EMAIL);
         this.mockMvc.perform(MockMvcRequestBuilders.post(registrationActionUrlTemplate).content(getUserValueAsJSONString())
             .contentType(MediaType.APPLICATION_JSON))
             .andExpect(MockMvcResultMatchers.status().isBadRequest())
