@@ -15,7 +15,6 @@ public class MockUserServiceImpl implements UserService {
 
     @Override
     public Boolean register(User user) {
-        System.out.println("registering *******************************************");
         if (users.contains(user)) {
             return false;
         } else {
