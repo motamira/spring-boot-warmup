@@ -5,6 +5,7 @@ import java.net.URI;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,9 @@ public class RestUserRegistrationConsumerImpl implements RestConsumer {
 
     private final RestTemplate restTemplate;
 
+    @Value("${api.registration.url}")
+    String registrationUrlString;
+
     /**
      * Create a new post request to register the user information with the
      * user registration service.
@@ -32,7 +36,7 @@ public class RestUserRegistrationConsumerImpl implements RestConsumer {
     public boolean postUserRegistration(UserInputDTO userInputDTO) {
         try {
             ResponseEntity<String> response = restTemplate.exchange(RequestEntity
-                .post(new URI("http://localhost:8080/api/users"))
+                .post(new URI(registrationUrlString))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.TEXT_PLAIN)
                 .body(userInputDTO), String.class);

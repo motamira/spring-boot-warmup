@@ -10,3 +10,7 @@ amqp:
   deadletter:
     queueName: jsclient.q.deadletter
     exchangeName: jsclient.deadletter.exchange
+
+api:
+  registration:
+    url: http://localhost:8080/api/users
