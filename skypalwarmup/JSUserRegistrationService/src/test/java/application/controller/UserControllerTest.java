@@ -1,11 +1,11 @@
 package application.controller;
 
 import application.TestData;
-import application.dao.UserRepository;
 import application.entity.AccountInformation;
 import application.entity.Contacts;
 import application.entity.PersonalDetails;
 import application.entity.User;
+import application.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.After;
 import org.junit.Assert;
@@ -13,8 +13,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Example;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Scope;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -27,14 +30,27 @@ import org.springframework.web.context.WebApplicationContext;
  * Copyright (c) 2016-2018, Jumia.
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@WebMvcTest(UserController.class)
 public class UserControllerTest {
 
     @Autowired
     private WebApplicationContext wac;
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
+
+    @Autowired
+    private MockUserServiceImpl mockUserService;
+
+    @TestConfiguration
+    static class MockUserServiceImplTestConfiguration {
+
+        @Bean
+        @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
+        public UserService userService() {
+            return new MockUserServiceImpl();
+        }
+    }
 
     private MockMvc mockMvc;
 
@@ -47,13 +63,14 @@ public class UserControllerTest {
     @Before
     public void setUp() {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
-        userRepository.deleteAll();
+        mockUserService.deleteAll();
         createUserUnderTest();
+        System.out.println(userService);
     }
 
     @After
     public void tearDown() {
-        userRepository.deleteAll();
+        mockUserService.deleteAll();
     }
 
     // TEST HELPERS
@@ -90,7 +107,7 @@ public class UserControllerTest {
             .contentType(MediaType.APPLICATION_JSON))
             .andExpect(MockMvcResultMatchers.status().isCreated())
             .andExpect(MockMvcResultMatchers.content().string(RegistrationActionResponses.CREATED.statusMessage))
-            .andDo((result) -> Assert.assertTrue(userRepository.findOne(Example.of(userUnderTest)).isPresent()))
+            .andDo((result) -> Assert.assertTrue(mockUserService.exists(userUnderTest)))
             .andReturn();
     }
 
@@ -101,6 +118,7 @@ public class UserControllerTest {
             .contentType(MediaType.APPLICATION_JSON))
             .andExpect(MockMvcResultMatchers.status().isBadRequest())
             .andExpect(MockMvcResultMatchers.content().string(RegistrationActionResponses.BAD_REQUEST.statusMessage))
+            .andDo((result) -> Assert.assertFalse(mockUserService.exists(userUnderTest)))
             .andReturn();
     }
 
