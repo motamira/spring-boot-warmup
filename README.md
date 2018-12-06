@@ -16,7 +16,7 @@ Before venturing into this project itself it is important to have at least some 
 
 # 1 - Setup your development environment
 
-- Install Java JDK8 in your machine. Download it from http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html Or install it from Linux repositories (oracle-java8-installer).
+- Install OpenJDK 8 on your machine https://openjdk.java.net/install/ 
 - Setup Maven. Maven is used to build and compile Jumia Services applications. The recommended version to use with our applications is 3.0.5. Download and install it followinf the instructions on https://maven.apache.org/
 - In Jumia Services the official IDE is IntelliJ Idea, as such you should get a free working community edition copy on https://www.jetbrains.com/idea/download/#section=linux
 - Setup intelliJ with Jumia Services code style formater. Wrongly formatted source files with not pass code reviews. Learn about the formatter here: Java Code Style
