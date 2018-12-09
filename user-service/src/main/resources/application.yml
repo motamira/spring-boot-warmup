@@ -1,0 +1,34 @@
+spring:
+  profiles:
+    active: dev
+
+logging:
+  level:
+    root: error
+    org:
+      springframework:
+       data: debug
+---
+
+server:
+  port: 8585
+
+spring:
+  profiles: dev
+
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: warmup
+---
+
+spring:
+  profiles: it-test
+
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: warmup-test
+
