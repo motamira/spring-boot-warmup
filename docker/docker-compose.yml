@@ -1,0 +1,23 @@
+version: "3"
+services:
+  database:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    networks:
+      default:
+        aliases:
+          - db.dev
+    volumes:
+      - ./db:/data/lib
+    environment:
+      - MONGO_DATA_DIR=/data/db
+  rabbit:
+    image: rabbitmq:3-management
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    networks:
+      default:
+        aliases:
+          - rabbitmq.dev
