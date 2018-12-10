@@ -2,6 +2,7 @@ package com.jumia.warmup.dto;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.io.Serializable;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -17,7 +18,7 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString(exclude = "password")
-public class AccountInformationDTO {
+public class AccountInformationDTO implements Serializable {
 
     @NotNull(message = "Please enter username!")
     @NotEmpty(message = "Please enter username!")

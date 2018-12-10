@@ -2,6 +2,7 @@ package com.jumia.warmup.dto;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.io.Serializable;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -18,7 +19,7 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString
-public class ContactsDTO {
+public class ContactsDTO implements Serializable {
 
     @Pattern(regexp = "^\\+(?:[0-9] ?){6,14}[0-9]$", message = "Please enter valid cell phone, i.e must contain the country indicative.")
     private String cellPhone;

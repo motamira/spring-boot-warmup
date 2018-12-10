@@ -1,4 +1,4 @@
-package com.jumia.warmup.jsuserregistrationservice.integrationTest;
+package com.jumia.warmup.integrationTest;
 
 import static org.springframework.test.util.AssertionErrors.assertEquals;
 

@@ -5,6 +5,8 @@ import com.jumia.warmup.entity.User;
 import com.jumia.warmup.exception.UserALreadyExistException;
 import com.jumia.warmup.repository.UserRepository;
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,8 @@ import java.util.Objects;
 @Service
 public class UserService implements IUserService {
 
+    static final Logger LOGGER = LoggerFactory.getLogger(UserService.class);
+
     @Autowired
     private UserRepository userRepository;
 
@@ -24,6 +28,8 @@ public class UserService implements IUserService {
 
     @Override
     public void registerUser(final UserDTO userDTO) throws UserALreadyExistException {
+
+        LOGGER.info("Registered user payload: "+ userDTO);
 
         User existingUser = userRepository.findByUserName(userDTO.getAccountInformationDTO().getUserName());
 

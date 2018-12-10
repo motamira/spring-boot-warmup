@@ -2,6 +2,7 @@ package com.jumia.warmup.dto;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.io.Serializable;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -17,7 +18,7 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString
-public class PersonalDetailsDTO {
+public class PersonalDetailsDTO implements Serializable {
 
     @NotNull(message = "Please enter first name!")
     @NotEmpty(message = "Please enter first name!")

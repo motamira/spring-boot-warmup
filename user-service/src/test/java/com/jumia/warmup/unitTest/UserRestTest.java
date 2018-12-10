@@ -1,4 +1,4 @@
-package com.jumia.warmup.jsuserregistrationservice.unitTest;
+package com.jumia.warmup.unitTest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jumia.warmup.dto.AccountInformationDTO;
