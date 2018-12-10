@@ -1,5 +1,6 @@
 package com.jumia.warmup.jsuserregistrationclient;
 
+import org.springframework.amqp.core.AcknowledgeMode;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.FanoutExchange;
@@ -8,18 +9,16 @@ import org.springframework.amqp.core.QueueBuilder;
 import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.amqp.rabbit.annotation.RabbitListenerConfigurer;
+import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
+import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.rabbit.listener.RabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.listener.RabbitListenerEndpointRegistrar;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.messaging.converter.MappingJackson2MessageConverter;
 import org.springframework.messaging.handler.annotation.support.DefaultMessageHandlerMethodFactory;
-import org.springframework.messaging.handler.annotation.support.MessageHandlerMethodFactory;
-import org.springframework.validation.SmartValidator;
 
 
 /**
@@ -44,9 +43,6 @@ public class AmqpConfiguration implements RabbitListenerConfigurer {
     @Value("${spring.rabbitmq.dead.exchange}")
     String USERS_DEAD_EXCHANGE;
 
-    @Autowired
-    private SmartValidator smartValidator;
-
     @Bean
     Queue queue() {
         return QueueBuilder.durable(USERS_QUEUE)
@@ -67,7 +63,9 @@ public class AmqpConfiguration implements RabbitListenerConfigurer {
 
     @Bean
     Queue deadLetterQueue() {
-        return QueueBuilder.durable(USERS_DEAD_QUEUE).build();
+        return QueueBuilder.durable(USERS_DEAD_QUEUE)
+            .withArgument("x-dead-letter-exchange", USERS_DEAD_EXCHANGE)
+            .build();
     }
 
     @Bean
@@ -81,30 +79,32 @@ public class AmqpConfiguration implements RabbitListenerConfigurer {
     }
 
     @Bean
+    public ConnectionFactory connectionFactory() {
+        return new CachingConnectionFactory();
+    }
+
+    @Bean
     public Jackson2JsonMessageConverter jackson2JsonMessageConverter() {
         return new Jackson2JsonMessageConverter();
     }
 
     @Bean
-    public RabbitTemplate rabbitTemplate(final ConnectionFactory connectionFactory) {
+    public RabbitListenerContainerFactory rabbitListenerContainerFactory(ConnectionFactory connectionFactory, Jackson2JsonMessageConverter
+        jackson2JsonMessageConverter) {
 
-        final RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
-        rabbitTemplate.setMessageConverter(jackson2JsonMessageConverter());
-        return rabbitTemplate;
+        final SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
+        factory.setConnectionFactory(connectionFactory);
+        factory.setMessageConverter(jackson2JsonMessageConverter);
+        factory.setAcknowledgeMode(AcknowledgeMode.MANUAL);
+
+        return factory;
     }
 
     @Bean
-    MessageHandlerMethodFactory messageHandlerMethodFactory() {
+    public DefaultMessageHandlerMethodFactory messageHandlerMethodFactory() {
 
-        DefaultMessageHandlerMethodFactory messageHandlerMethodFactory = new DefaultMessageHandlerMethodFactory();
-        messageHandlerMethodFactory.setMessageConverter(mappingJackson2MessageConverter());
-        messageHandlerMethodFactory.setValidator(smartValidator);
-        return messageHandlerMethodFactory;
-    }
-
-    @Bean
-    public MappingJackson2MessageConverter mappingJackson2MessageConverter() {
-        return new MappingJackson2MessageConverter();
+        DefaultMessageHandlerMethodFactory factory = new DefaultMessageHandlerMethodFactory();
+        return factory;
     }
 
     @Override
@@ -112,6 +112,5 @@ public class AmqpConfiguration implements RabbitListenerConfigurer {
 
         rabbitListenerEndpointRegistrar.setMessageHandlerMethodFactory(messageHandlerMethodFactory());
     }
-
 }
 
