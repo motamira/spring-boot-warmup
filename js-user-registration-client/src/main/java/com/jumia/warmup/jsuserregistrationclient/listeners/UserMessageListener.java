@@ -9,7 +9,6 @@ import javax.validation.Valid;
 import javax.validation.Validator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.amqp.AmqpRejectAndDontRequeueException;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.support.AmqpHeaders;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,8 +37,10 @@ public class UserMessageListener {
             Set<ConstraintViolation<UserDTO>> errors = this.validator.validate(userDTO);
 
             if (!errors.isEmpty()) {
+
+                LOG.info("Validation errors!");
+
                 channel.basicAck(tag, false);
-                throw new AmqpRejectAndDontRequeueException("Validation failed.");
             }
 
             LOG.info("================================== UserDTO Received: " + userDTO.toString());
