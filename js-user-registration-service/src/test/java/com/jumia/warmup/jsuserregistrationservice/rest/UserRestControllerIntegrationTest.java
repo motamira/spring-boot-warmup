@@ -38,7 +38,7 @@ public class UserRestControllerIntegrationTest {
     }
 
     @Test
-    public void registerUser_1_created() {
+    public void registerUser_whenCreateUser_return_201() {
 
         ResponseEntity<UserDTO> responseEntity =
             restTemplate.postForEntity(Constants.API_USERS, userDTO, UserDTO.class);
@@ -47,7 +47,7 @@ public class UserRestControllerIntegrationTest {
     }
 
     @Test
-    public void registerUser_2_conflict() {
+    public void registerUser_whenCreateUser_return_409() {
         ResponseEntity<UserDTO> responseEntity =
             restTemplate.postForEntity(Constants.API_USERS, userDTO, UserDTO.class);
 
@@ -57,7 +57,7 @@ public class UserRestControllerIntegrationTest {
     }
 
     @Test
-    public void registerUser_badRequest() {
+    public void registerUser_whenValidationFails_return_400() {
 
         userDTO.getPersonalDetailsDTO().setFirstName(null);
 

@@ -37,14 +37,11 @@ public class Constants {
     public static final String VALID_EMAIL = "someEmail@gmail.com";
     public static final String VALID_PHONE_NUMBER = "+00 000 000 000";
 
-    public static final String EMPTY_FIRST_NAME = "";
-    public static final String EMPTY_USER_NAME = "";
+    public static final String EMPTY = "";
     public static final String INVALID_USER_NAME_LESS_THAN_4_CHARS = "aaa";
     public static final String INVALID_USER_NAME_GREATER_THAN_10_CHARS = "asdhyuikjhdthtr";
-    public static final String EMPTY_PASSWORD = "";
     public static final String INVALID_PASSWORD_NO_CAPITAL_CHARS = "somepassword12@#";
     public static final String INVALID_PASSWORD_NO_NUMBERS = "somePassword$%";
-    public static final String EMPTY_EMAIL = "";
     public static final String INVALID_EMAIL = "hjjhjjhjh.com";
 }
 

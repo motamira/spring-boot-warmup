@@ -12,6 +12,7 @@ import com.jumia.warmup.jsuserregistrationservice.dtos.UserDTO;
 import com.jumia.warmup.jsuserregistrationservice.providers.UserDTOProvider;
 import com.jumia.warmup.jsuserregistrationservice.services.UserRegistrationServiceInterface;
 import com.jumia.warmup.jsuserregistrationservice.utils.Constants;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(UserRestController.class)
-public class UserRestControllerTest {
+public class UserRegisterIntegrationTest {
 
     @Autowired
     private MockMvc mvc;
@@ -33,13 +34,14 @@ public class UserRestControllerTest {
 
     UserDTO userDTO;
 
-    public UserRestControllerTest() {
+    @Before
+    public void setUp() {
 
         this.userDTO = UserDTOProvider.getUserDTO();
     }
 
     @Test
-    public void registerUser_expectBadeRequest_firstName_null() throws Exception {
+    public void registerUser_when_firstName_null_badRequest() throws Exception {
 
         userDTO.getPersonalDetailsDTO().setFirstName(null);
 
@@ -52,9 +54,9 @@ public class UserRestControllerTest {
     }
 
     @Test
-    public void registerUser_expectBadeRequest_firstName_empty() throws Exception {
+    public void registerUser_when_firstName_empty_badRequest() throws Exception {
 
-        userDTO.getPersonalDetailsDTO().setFirstName(Constants.EMPTY_FIRST_NAME);
+        userDTO.getPersonalDetailsDTO().setFirstName(Constants.EMPTY);
 
         mvc.perform(post(Constants.API_USERS)
             .contentType(APPLICATION_JSON)
@@ -65,7 +67,7 @@ public class UserRestControllerTest {
     }
 
     @Test
-    public void registerUser_expectBadeRequest_userName_null() throws Exception {
+    public void registerUser_when_userName_null_badRequest() throws Exception {
 
         userDTO.getAccountInformationDTO().setUserName(null);
 
@@ -78,9 +80,9 @@ public class UserRestControllerTest {
     }
 
     @Test
-    public void registerUser_expectBadeRequest_userName_empty() throws Exception {
+    public void registerUser_when_userName_empty_badRequest() throws Exception {
 
-        userDTO.getAccountInformationDTO().setUserName(Constants.EMPTY_USER_NAME);
+        userDTO.getAccountInformationDTO().setUserName(Constants.EMPTY);
 
         mvc.perform(post(Constants.API_USERS)
             .contentType(APPLICATION_JSON)
@@ -91,7 +93,7 @@ public class UserRestControllerTest {
     }
 
     @Test
-    public void registerUser_expectBadeRequest_userName_lessThan4Chars() throws Exception {
+    public void registerUser_when_userName_lessThan4Chars_badRequest() throws Exception {
 
         userDTO.getAccountInformationDTO().setUserName(Constants.INVALID_USER_NAME_LESS_THAN_4_CHARS);
 
@@ -104,7 +106,7 @@ public class UserRestControllerTest {
     }
 
     @Test
-    public void registerUser_expectBadeRequest_userName_greaterThan10Chars() throws Exception {
+    public void registerUser_when_userName_greaterThan10Chars_badRequest() throws Exception {
 
         userDTO.getAccountInformationDTO().setUserName(Constants.INVALID_USER_NAME_GREATER_THAN_10_CHARS);
 
@@ -117,7 +119,7 @@ public class UserRestControllerTest {
     }
 
     @Test
-    public void registerUser_expectBadeRequest_password_null() throws Exception {
+    public void registerUser_when_password_null_badRequest() throws Exception {
 
         userDTO.getAccountInformationDTO().setPassword(null);
 
@@ -131,9 +133,9 @@ public class UserRestControllerTest {
 
 
     @Test
-    public void registerUser_expectBadeRequest_password_empty() throws Exception {
+    public void registerUser_when_password_empty_badRequest() throws Exception {
 
-        userDTO.getAccountInformationDTO().setPassword(Constants.EMPTY_PASSWORD);
+        userDTO.getAccountInformationDTO().setPassword(Constants.EMPTY);
 
         mvc.perform(post(Constants.API_USERS)
             .contentType(APPLICATION_JSON)
@@ -144,7 +146,7 @@ public class UserRestControllerTest {
     }
 
     @Test
-    public void registerUser_expectBadeRequest_password_noCapitalCharacters() throws Exception {
+    public void registerUser_when_password_noCapitalCharacters_badRequest() throws Exception {
 
         userDTO.getAccountInformationDTO().setPassword(Constants.INVALID_PASSWORD_NO_CAPITAL_CHARS);
 
@@ -157,7 +159,7 @@ public class UserRestControllerTest {
     }
 
     @Test
-    public void registerUser_expectBadeRequest_password_noNumber() throws Exception {
+    public void registerUser_when_password_noNumber_badRequest() throws Exception {
 
         userDTO.getAccountInformationDTO().setPassword(Constants.INVALID_PASSWORD_NO_NUMBERS);
 
@@ -170,7 +172,7 @@ public class UserRestControllerTest {
     }
 
     @Test
-    public void registerUser_expectBadeRequest_email_null() throws Exception {
+    public void registerUser_when_email_null_badRequest() throws Exception {
 
         userDTO.getContactsDTO().setEmail(null);
 
@@ -183,9 +185,9 @@ public class UserRestControllerTest {
     }
 
     @Test
-    public void registerUser_expectBadeRequest_email_empty() throws Exception {
+    public void registerUser_when_email_empty_badRequest() throws Exception {
 
-        userDTO.getContactsDTO().setEmail(Constants.EMPTY_EMAIL);
+        userDTO.getContactsDTO().setEmail(Constants.EMPTY);
 
         mvc.perform(post(Constants.API_USERS)
             .contentType(APPLICATION_JSON)
@@ -196,7 +198,7 @@ public class UserRestControllerTest {
     }
 
     @Test
-    public void registerUser_expectBadeRequest_email_wrongFormat() throws Exception {
+    public void registerUser_when_email_wrongFormat_badRequest() throws Exception {
 
         userDTO.getContactsDTO().setEmail(Constants.INVALID_EMAIL);
 
@@ -209,7 +211,7 @@ public class UserRestControllerTest {
     }
 
     @Test
-    public void registerUser_method_not_allowed() throws Exception {
+    public void registerUser_method_not_allowed_badRequest() throws Exception {
 
         mvc.perform(put(Constants.API_USERS)
             .contentType(APPLICATION_JSON)
