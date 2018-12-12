@@ -5,13 +5,16 @@ import java.io.Serializable;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
 public class PersonalDetailsDTO implements Serializable {
 
     @NotNull(message = Constants.EMPTY_FIRST_NAME_ERROR_MESSAGE)
@@ -23,9 +26,7 @@ public class PersonalDetailsDTO implements Serializable {
     @Max(100)
     private int age;
 
-    public PersonalDetailsDTO() {
-    }
-
+    @Builder
     public PersonalDetailsDTO(String firstName, String lastName, int age) {
         this.firstName = firstName;
         this.lastName = lastName;

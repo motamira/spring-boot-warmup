@@ -1,6 +1,8 @@
 package com.jumia.warmup.jsuserregistrationservice.entities;
 
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.data.annotation.Id;
@@ -10,6 +12,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Getter
 @ToString
 @Document
+@NoArgsConstructor
 public class Contacts {
 
     @Id
@@ -19,9 +22,7 @@ public class Contacts {
 
     private String email;
 
-    public Contacts() {
-    }
-
+    @Builder
     public Contacts(String id, String cellPhone, String email) {
         this.id = id;
         this.cellPhone = cellPhone;

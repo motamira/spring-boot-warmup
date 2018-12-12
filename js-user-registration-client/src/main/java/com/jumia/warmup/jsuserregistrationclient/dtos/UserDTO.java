@@ -4,13 +4,16 @@ import com.jumia.warmup.jsuserregistrationclient.utils.Constants;
 import java.io.Serializable;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
 public class UserDTO implements Serializable {
 
     @Valid
@@ -25,9 +28,7 @@ public class UserDTO implements Serializable {
     @NotNull(message = Constants.EMPTY_PERSONAL_DETAILS_ERROR_MESSAGE)
     private PersonalDetailsDTO personalDetailsDTO;
 
-    public UserDTO() {
-    }
-
+    @Builder
     public UserDTO(AccountInformationDTO accountInformationDTO, ContactsDTO contactsDTO, PersonalDetailsDTO personalDetailsDTO) {
         this.accountInformationDTO = accountInformationDTO;
         this.contactsDTO = contactsDTO;

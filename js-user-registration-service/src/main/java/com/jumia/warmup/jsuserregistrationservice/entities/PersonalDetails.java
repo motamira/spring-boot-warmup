@@ -1,6 +1,8 @@
 package com.jumia.warmup.jsuserregistrationservice.entities;
 
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.data.annotation.Id;
@@ -10,6 +12,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Getter
 @ToString
 @Document
+@NoArgsConstructor
 public class PersonalDetails {
 
     @Id
@@ -21,9 +24,7 @@ public class PersonalDetails {
 
     private int age;
 
-    public PersonalDetails() {
-    }
-
+    @Builder
     public PersonalDetails(String id, String firstName, String lastName, int age) {
         this.id = id;
         this.firstName = firstName;

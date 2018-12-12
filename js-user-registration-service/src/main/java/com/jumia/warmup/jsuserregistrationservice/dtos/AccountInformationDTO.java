@@ -3,6 +3,7 @@ package com.jumia.warmup.jsuserregistrationservice.dtos;
 import com.jumia.warmup.jsuserregistrationservice.utils.Constants;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -10,6 +11,7 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString(exclude = "password")
+@Builder
 public class AccountInformationDTO {
 
     @NotEmpty(message = Constants.EMPTY_USER_NAME_ERROR_MESSAGE)
@@ -19,12 +21,4 @@ public class AccountInformationDTO {
     @NotEmpty(message = Constants.EMPTY_PASSWORD_ERROR_MESSAGE)
     @Pattern(regexp = Constants.PASSWORD_REGEX, message = Constants.INVALID_PASSWORD_ERROR_MESSAGE)
     private String password;
-
-    public AccountInformationDTO() {
-    }
-
-    public AccountInformationDTO(String userName, String password) {
-        this.userName = userName;
-        this.password = password;
-    }
 }

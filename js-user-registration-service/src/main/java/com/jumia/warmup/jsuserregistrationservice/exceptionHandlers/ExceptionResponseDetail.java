@@ -1,20 +1,21 @@
 package com.jumia.warmup.jsuserregistrationservice.exceptionHandlers;
 
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
 public class ExceptionResponseDetail {
 
     String fieldError;
     String defaultMessage;
 
-    public ExceptionResponseDetail() {
-    }
-
+    @Builder
     public ExceptionResponseDetail(String x, String y) {
         this.fieldError = x;
         this.defaultMessage = y;

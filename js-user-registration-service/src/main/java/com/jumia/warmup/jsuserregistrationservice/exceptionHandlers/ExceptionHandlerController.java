@@ -31,6 +31,7 @@ public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
             Constants.VALIDATION_FAILED,
             exceptionResponseDetails);
 
+
         return handleExceptionInternal(
             ex, exceptionResponse, headers, exceptionResponse.getStatus(), request);
     }

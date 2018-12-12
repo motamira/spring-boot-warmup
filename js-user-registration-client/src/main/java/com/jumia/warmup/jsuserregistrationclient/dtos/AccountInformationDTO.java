@@ -4,13 +4,16 @@ import com.jumia.warmup.jsuserregistrationclient.utils.Constants;
 import java.io.Serializable;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 @Getter
 @Setter
 @ToString(exclude = "password")
+@NoArgsConstructor
 public class AccountInformationDTO implements Serializable {
 
     @NotEmpty(message = Constants.EMPTY_USER_NAME_ERROR_MESSAGE)
@@ -21,9 +24,7 @@ public class AccountInformationDTO implements Serializable {
     @Pattern(regexp = Constants.PASSWORD_REGEX, message = Constants.INVALID_PASSWORD_ERROR_MESSAGE)
     private String password;
 
-    public AccountInformationDTO() {
-    }
-
+    @Builder
     public AccountInformationDTO(String userName, String password) {
         this.userName = userName;
         this.password = password;

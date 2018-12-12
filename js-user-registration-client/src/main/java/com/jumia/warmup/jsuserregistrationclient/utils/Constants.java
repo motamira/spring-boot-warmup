@@ -27,6 +27,8 @@ public class Constants {
     public static final String X_DEAD_LETTER_EXCHANGE = "x-dead-letter-exchange";
     public static final String X_DEAD_LETTER_ROUTING_KEY = "x-dead-letter-routing-key";
 
+    public static final int FIVE_MS = 5000;
+
     public static final String CHANNEL_EXCEPTION = ">>>>>>>>>>>>>>>>>>>>>>> Channel exception";
     public static final String USER_DTO_RECEIVED = ">>>>>>>>>>>>>>>>>>>>>>> UserDTO Received: ";
     public static final String VALIDATION_FAILED = ">>>>>>>>>>>>>>>>>>>>>>> Validation Failed";

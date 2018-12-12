@@ -22,8 +22,6 @@ public class UserMessageSender implements UserMessageSenderInterface {
 
     static final Logger LOG = LoggerFactory.getLogger(UserMessageSender.class);
 
-    public static final int FIVE_MS = 5000;
-
     @Value(Constants.$_SPRING_RABBITMQ_EXCHANGE)
     private String USERS_EXCHANGE;
 
@@ -37,7 +35,7 @@ public class UserMessageSender implements UserMessageSenderInterface {
         this.rabbitTemplate = rabbitTemplate;
     }
 
-    @Scheduled(fixedDelay = FIVE_MS)
+    @Scheduled(fixedDelay = Constants.FIVE_MS)
     public void sendUser() {
 
         UserDTO userDTO = new UserDTO(new AccountInformationDTO("sara&^^&^&Client", "aaZZa44@")

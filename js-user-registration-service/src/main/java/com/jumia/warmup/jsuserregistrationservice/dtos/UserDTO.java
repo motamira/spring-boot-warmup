@@ -3,6 +3,7 @@ package com.jumia.warmup.jsuserregistrationservice.dtos;
 import com.jumia.warmup.jsuserregistrationservice.utils.Constants;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -10,6 +11,7 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
+@Builder
 public class UserDTO {
 
     @Valid
@@ -23,13 +25,4 @@ public class UserDTO {
     @Valid
     @NotNull(message = Constants.EMPTY_PERSONAL_DETAILS_ERROR_MESSAGE)
     private PersonalDetailsDTO personalDetailsDTO;
-
-    public UserDTO() {
-    }
-
-    public UserDTO(AccountInformationDTO accountInformationDTO, ContactsDTO contactsDTO, PersonalDetailsDTO personalDetailsDTO) {
-        this.accountInformationDTO = accountInformationDTO;
-        this.contactsDTO = contactsDTO;
-        this.personalDetailsDTO = personalDetailsDTO;
-    }
 }
