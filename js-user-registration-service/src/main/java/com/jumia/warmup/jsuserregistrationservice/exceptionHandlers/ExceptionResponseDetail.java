@@ -16,8 +16,8 @@ public class ExceptionResponseDetail {
     String defaultMessage;
 
     @Builder
-    public ExceptionResponseDetail(String x, String y) {
-        this.fieldError = x;
-        this.defaultMessage = y;
+    public ExceptionResponseDetail(String fieldError, String defaultMessage) {
+        this.fieldError = fieldError;
+        this.defaultMessage = defaultMessage;
     }
 }

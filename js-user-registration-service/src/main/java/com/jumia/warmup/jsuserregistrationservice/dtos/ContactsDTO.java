@@ -11,7 +11,6 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
-@Builder
 public class ContactsDTO {
 
     private String cellPhone;
@@ -19,4 +18,10 @@ public class ContactsDTO {
     @NotEmpty(message = Constants.EMPTY_EMAIL_ERROR_MESSAGE)
     @Email(message = Constants.INVALID_EMAIL_ERROR_MESSAGE)
     private String email;
+
+    @Builder
+    public ContactsDTO(String cellPhone, String email) {
+        this.cellPhone = cellPhone;
+        this.email = email;
+    }
 }

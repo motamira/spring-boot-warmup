@@ -1,12 +1,14 @@
 package com.jumia.warmup.jsuserregistrationclient.utils;
 
 public class Constants {
-    
+
     public static final String USER_NAME_REGEX = "^[a-zA-Z0-9]{4,10}$";
     public static final String PASSWORD_REGEX = "^(?=.*[0-9])(?=.*[A-Z])(?=.*[!@#$%^&*+=-_])(?=\\S+$).{3,}$";
+    public static final int MAX_AGE = 100;
 
     public static final String EMPTY_FIRST_NAME_ERROR_MESSAGE = "First name should not be empty.";
     public static final String EMPTY_USER_NAME_ERROR_MESSAGE = "User name should not be empty.";
+    public static final String INVALID_AGE_ERROR_MESSAGE = "Invalid age.";
     public static final String INVALID_USER_NAME_ERROR_MESSAGE = "User name should be between 4 and 10 alphanumeric characters.";
     public static final String EMPTY_PASSWORD_ERROR_MESSAGE = "Password should not be empty.";
     public static final String INVALID_PASSWORD_ERROR_MESSAGE = "Password should contain at least one capital letter, a number and a "
@@ -28,6 +30,14 @@ public class Constants {
     public static final String X_DEAD_LETTER_ROUTING_KEY = "x-dead-letter-routing-key";
 
     public static final int FIVE_MS = 5000;
+
+    public static final String VALID_FIRST_NAME = "sara";
+    public static final String VALID_SECOND_NAME = "salah";
+    public static final int VALID_AGE = 10;
+    public static final String VALID_USER_NAME = "saraTest";
+    public static final String VALID_PASSWORD = "aaZZa44@";
+    public static final String VALID_EMAIL = "someEmail@gmail.com";
+    public static final String VALID_PHONE_NUMBER = "+00 000 000 000";
 
     public static final String CHANNEL_EXCEPTION = ">>>>>>>>>>>>>>>>>>>>>>> Channel exception";
     public static final String USER_DTO_RECEIVED = ">>>>>>>>>>>>>>>>>>>>>>> UserDTO Received: ";

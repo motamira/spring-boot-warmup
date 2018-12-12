@@ -23,7 +23,7 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <java.version>1.8</java.version>
 
-    <js.user.registration.service.port>8080</js.user.registration.service.port>
+    <js.user.registration.service.port>8183</js.user.registration.service.port>
 
     <mongo.host>localhost</mongo.host>
     <mongo.port>27017</mongo.port>

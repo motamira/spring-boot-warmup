@@ -11,7 +11,6 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
-@Builder
 public class UserDTO {
 
     @Valid
@@ -25,4 +24,14 @@ public class UserDTO {
     @Valid
     @NotNull(message = Constants.EMPTY_PERSONAL_DETAILS_ERROR_MESSAGE)
     private PersonalDetailsDTO personalDetailsDTO;
+
+    @Builder
+    public UserDTO(
+        AccountInformationDTO accountInformationDTO,
+        ContactsDTO contactsDTO,
+        PersonalDetailsDTO personalDetailsDTO) {
+        this.accountInformationDTO = accountInformationDTO;
+        this.contactsDTO = contactsDTO;
+        this.personalDetailsDTO = personalDetailsDTO;
+    }
 }

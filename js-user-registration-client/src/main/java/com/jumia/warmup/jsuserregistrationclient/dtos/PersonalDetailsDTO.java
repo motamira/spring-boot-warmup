@@ -23,7 +23,7 @@ public class PersonalDetailsDTO implements Serializable {
 
     private String lastName;
 
-    @Max(100)
+    @Max(value = Constants.MAX_AGE, message = Constants.INVALID_AGE_ERROR_MESSAGE)
     private int age;
 
     @Builder

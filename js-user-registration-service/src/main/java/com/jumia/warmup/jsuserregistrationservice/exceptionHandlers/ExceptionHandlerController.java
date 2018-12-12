@@ -24,13 +24,19 @@ public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
         WebRequest request) {
 
         List<ExceptionResponseDetail> exceptionResponseDetails = ex.getBindingResult().getFieldErrors().stream()
-            .map(fieldError -> new ExceptionResponseDetail(fieldError.getField(), fieldError.getDefaultMessage()))
+            .map(fieldError -> ExceptionResponseDetail
+                .builder()
+                .fieldError(fieldError.getField())
+                .defaultMessage(fieldError.getDefaultMessage())
+                .build())
             .collect(Collectors.toList());
 
-        ExceptionResponse exceptionResponse = new ExceptionResponse(HttpStatus.BAD_REQUEST,
-            Constants.VALIDATION_FAILED,
-            exceptionResponseDetails);
-
+        ExceptionResponse exceptionResponse = ExceptionResponse
+            .builder()
+            .status(HttpStatus.BAD_REQUEST)
+            .message(Constants.VALIDATION_FAILED)
+            .details(exceptionResponseDetails)
+            .build();
 
         return handleExceptionInternal(
             ex, exceptionResponse, headers, exceptionResponse.getStatus(), request);

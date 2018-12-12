@@ -29,6 +29,9 @@ import org.springframework.messaging.handler.annotation.support.DefaultMessageHa
 @EnableRabbit
 public class AmqpConfiguration implements RabbitListenerConfigurer {
 
+    @Value(Constants.$_SPRING_RABBITMQ_DEAD_EXCHANGE)
+    String USERS_DEAD_EXCHANGE;
+
     @Value(Constants.$_SPRING_RABBITMQ_QUEUE)
     private String USERS_QUEUE;
 
@@ -40,9 +43,6 @@ public class AmqpConfiguration implements RabbitListenerConfigurer {
 
     @Value(Constants.$_SPRING_RABBITMQ_DEAD_QUEUE)
     private String USERS_DEAD_QUEUE;
-
-    @Value(Constants.$_SPRING_RABBITMQ_DEAD_EXCHANGE)
-    String USERS_DEAD_EXCHANGE;
 
     @Bean
     Queue queue() {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
@@ -33,7 +33,7 @@
     <spring.rabbitmq.dead.queue>jsclient.q.deadletter</spring.rabbitmq.dead.queue>
     <spring.rabbitmq.dead.exchange>jsclient.deadletter.exchange</spring.rabbitmq.dead.exchange>
 
-    <user.registration.service.url>http://localhost:8080/api/users</user.registration.service.url>
+    <user.registration.service.url>http://localhost:8183/api/users</user.registration.service.url>
   </properties>
 
   <dependencies>
