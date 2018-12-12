@@ -1,0 +1,26 @@
+spring:
+  profiles:
+    active: dev
+
+logging:
+  level:
+    root: info
+    org:
+      springframework:
+       data: debug
+---
+
+server:
+  port: 8686
+
+spring:
+  profiles: dev
+
+---
+
+  server:
+    port: 8686
+
+  spring:
+    profiles: dev-invalid-data
+
