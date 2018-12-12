@@ -2,45 +2,45 @@ package com.jumia.warmup.service;
 
 import com.jumia.warmup.dto.UserDTO;
 import com.jumia.warmup.entity.User;
-import com.jumia.warmup.exception.UserALreadyExistException;
-import com.jumia.warmup.repository.UserRepository;
+import com.jumia.warmup.exception.UserAlreadyExistException;
+import com.jumia.warmup.repository.UserRepositoryInterface;
+import com.jumia.warmup.util.Constants;
+import java.util.Objects;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Objects;
-
 /**
  * The type User service.
  */
 @Service
-public class UserService implements IUserService {
+public class UserService implements UserServiceInterface {
 
     static final Logger LOGGER = LoggerFactory.getLogger(UserService.class);
 
     @Autowired
-    private UserRepository userRepository;
+    private UserRepositoryInterface userRepositoryInterface;
 
     @Autowired
     private ModelMapper modelMapper;
 
     @Override
-    public void registerUser(final UserDTO userDTO) throws UserALreadyExistException {
+    public void registerUser(final UserDTO userDTO) throws UserAlreadyExistException {
 
-        LOGGER.info("Registered user payload: "+ userDTO);
+        LOGGER.info(Constants.USER_PAYLOAD + userDTO);
 
-        User existingUser = userRepository.findByUserName(userDTO.getAccountInformationDTO().getUserName());
+        User existingUser = userRepositoryInterface.findByUserName(userDTO.getAccountInformationDTO().getUserName());
 
-        if(Objects.isNull(existingUser)) {
+        if (Objects.isNull(existingUser)) {
 
             User user = modelMapper.map(userDTO, User.class);
 
-            userRepository.save(user);
+            userRepositoryInterface.save(user);
         } else {
 
-            throw new UserALreadyExistException();
+            throw new UserAlreadyExistException();
         }
     }
 }

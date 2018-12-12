@@ -3,6 +3,7 @@ package com.jumia.warmup.Listener;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jumia.warmup.dto.UserDTO;
 import com.jumia.warmup.service.UserService;
+import com.jumia.warmup.util.Constants;
 import com.rabbitmq.client.Channel;
 import java.util.Set;
 import javax.validation.ConstraintViolation;
@@ -47,7 +48,7 @@ public class UserRegistrationListener implements ChannelAwareMessageListener {
             channel.basicNack(message.getMessageProperties().getDeliveryTag(), false, false);
         }
 
-        LOGGER.info("Registered user payload: " + userDTO.toString());
+        LOGGER.info(Constants.USER_PAYLOAD + userDTO.toString());
 
         userService.registerUser(userDTO);
 

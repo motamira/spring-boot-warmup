@@ -3,9 +3,9 @@ package com.jumia.warmup.service;
 import com.jumia.warmup.dto.UserDTO;
 
 /**
- * The interface User service.
+ * The interface User service interface.
  */
-public interface IUserService {
+public interface UserServiceInterface {
 
     /**
      * Register user.

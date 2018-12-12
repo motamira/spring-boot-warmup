@@ -1,11 +1,12 @@
 package com.jumia.warmup.dto;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.jumia.warmup.util.Constants;
 import java.io.Serializable;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,33 +18,17 @@ import lombok.ToString;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @ToString
 public class PersonalDetailsDTO implements Serializable {
 
-    @NotNull(message = "Please enter first name!")
-    @NotEmpty(message = "Please enter first name!")
+    @NotEmpty(message = Constants.ENTER_FIRST_NAME)
     private String firstName;
 
     private String lastName;
 
-    @NotNull(message = "Please enter age!")
-    @Min(value = 0, message = "Please enter valid age!")
+    @NotNull(message = Constants.ENTER_AGE)
+    @Min(value = 0, message = Constants.ENTER_VALID_AGE)
     private Integer age;
-
-    /**
-     * Instantiates a new Personal details dto.
-     *
-     * @param firstName the first name
-     * @param lastName the last name
-     * @param age the age
-     */
-    @JsonCreator
-    public PersonalDetailsDTO(
-            @JsonProperty("firstName") final String firstName,
-            @JsonProperty("lastName") final String lastName,
-            @JsonProperty("age") final Integer age) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.age = age;
-    }
 }

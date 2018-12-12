@@ -1,5 +1,7 @@
 package com.jumia.warmup.entity;
 
+import com.jumia.warmup.util.Constants;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,27 +14,15 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString
 public class PersonalDetails {
 
-    @Field(value = "first_name")
+    @Field(value = Constants.FIRST_NAME)
     private String firstName;
 
-    @Field(value = "last_name")
+    @Field(value = Constants.LAST_NAME)
     private String lastName;
 
     private int age;
-
-    /**
-     * Instantiates a new Personal details.
-     *
-     * @param firstName the first name
-     * @param lastName the last name
-     * @param age the age
-     */
-    public PersonalDetails(String firstName, String lastName, int age) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.age = age;
-    }
 }

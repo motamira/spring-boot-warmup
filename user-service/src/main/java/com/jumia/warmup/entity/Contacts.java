@@ -1,5 +1,7 @@
 package com.jumia.warmup.entity;
 
+import com.jumia.warmup.util.Constants;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,23 +14,13 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString
 public class Contacts {
 
-    @Field("cell_phone")
+    @Field(Constants.CELL_PHONE)
     private String cellPhone;
 
     private String email;
-
-    /**
-     * Instantiates a new Contacts.
-     *
-     * @param cellPhone the cell phone
-     * @param email the email
-     */
-    public Contacts(String cellPhone, String email) {
-        this.cellPhone = cellPhone;
-        this.email = email;
-    }
 }
 

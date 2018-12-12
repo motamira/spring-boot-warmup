@@ -22,5 +22,5 @@ spring:
     port: 8686
 
   spring:
-    profiles: dev-invalid
+    profiles: dev-invalid-data
 

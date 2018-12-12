@@ -1,9 +1,8 @@
 package com.jumia.warmup.producer;
 
-import com.jumia.warmup.dto.AccountInformationDTO;
-import com.jumia.warmup.dto.ContactsDTO;
-import com.jumia.warmup.dto.PersonalDetailsDTO;
 import com.jumia.warmup.dto.UserDTO;
+import com.jumia.warmup.provider.UserDTOProvider;
+import com.jumia.warmup.util.Constants;
 import javax.annotation.PostConstruct;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +15,13 @@ import org.springframework.stereotype.Component;
  * Copyright (c) 2016 - 2018, Jumia.
  */
 @Component
-@Profile("dev-invalid")
+@Profile(Constants.DEV_INVALID_DATA_PROFILE)
 public class UserRegistrationNotValidProducer {
 
-    @Value("${rabbitmq.topic.exchange.name}")
+    @Value(Constants.TOPIC_EXCHANGE_NAME)
     private String topicExchangeName;
 
-    @Value("${rabbitmq.routing.key}")
+    @Value(Constants.ROUTING_KEY)
     private String routingKey;
 
     @Autowired
@@ -33,17 +32,14 @@ public class UserRegistrationNotValidProducer {
     @PostConstruct
     public void generateInvalidUserDTO() {
 
-        userDTO = new UserDTO(
-            new PersonalDetailsDTO("", "Hanfy", 27),
-            new AccountInformationDTO("mhanfy", "M_Hanfy_7"),
-            new ContactsDTO("+20 1275284823", "mohammed.ahmed.hanfy@gmail.com")
-        );
+        userDTO = UserDTOProvider.getUserDTO();
+        userDTO.getPersonalDetailsDTO().setFirstName(Constants.EMPTY_STRING);
     }
 
     /**
      * Register user.
      */
-    @Scheduled(fixedDelay = 50000l)
+    @Scheduled(fixedDelay = Constants.FIXED_MESSAGE_DELAY)
     public void registerUser() {
 
         this.rabbitTemplate.convertAndSend(topicExchangeName, routingKey, userDTO);

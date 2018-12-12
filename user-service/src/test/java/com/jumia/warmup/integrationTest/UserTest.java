@@ -2,11 +2,10 @@ package com.jumia.warmup.integrationTest;
 
 import static org.springframework.test.util.AssertionErrors.assertEquals;
 
-import com.jumia.warmup.dto.AccountInformationDTO;
-import com.jumia.warmup.dto.ContactsDTO;
-import com.jumia.warmup.dto.PersonalDetailsDTO;
 import com.jumia.warmup.dto.UserDTO;
+import com.jumia.warmup.provider.UserDTOProvider;
 import com.jumia.warmup.responseEntityHandler.ValidationError;
+import com.jumia.warmup.util.Constants;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
@@ -31,13 +30,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 /**
  * The type User test.
  */
-@IfProfileValue(name = AbstractEnvironment.ACTIVE_PROFILES_PROPERTY_NAME, value = "it-test")
+@IfProfileValue(name = AbstractEnvironment.ACTIVE_PROFILES_PROPERTY_NAME, value = Constants.IT_TEST_PROFILE)
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class UserTest {
 
-    private static final String PATH = "/api/users";
+    private static final String PATH = Constants.USER_REST + Constants.USER_REST_REGISTER_USERS;
 
     @LocalServerPort
     private int port;
@@ -57,10 +56,7 @@ public class UserTest {
     @Before
     public void setUp() {
 
-        userDTO = new UserDTO(
-                new PersonalDetailsDTO("Mohammed", "Hanfy", 27),
-                new AccountInformationDTO("mhanfy", "M_Hanfy_7"),
-                new ContactsDTO("+20 1275284823", "mohammed.ahmed.hanfy@gmail.com"));
+        userDTO = UserDTOProvider.getUserDTO();
 
         headers = new HttpHeaders();
         headers.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
@@ -83,10 +79,10 @@ public class UserTest {
         HttpEntity<UserDTO> entity = new HttpEntity<>(userDTO, headers);
 
         ResponseEntity response = restTemplate.exchange(
-                createURLWithPort(PATH),
-                HttpMethod.POST, entity, Object.class);
+            createURLWithPort(PATH),
+            HttpMethod.POST, entity, Object.class);
 
-        assertEquals("", HttpStatus.CREATED, response.getStatusCode());
+        assertEquals(Constants.EMPTY_STRING, HttpStatus.CREATED, response.getStatusCode());
     }
 
     /**
@@ -98,10 +94,10 @@ public class UserTest {
         HttpEntity<UserDTO> entity = new HttpEntity<>(userDTO, headers);
 
         ResponseEntity response = restTemplate.exchange(
-                createURLWithPort(PATH),
-                HttpMethod.PUT, entity, Object.class);
+            createURLWithPort(PATH),
+            HttpMethod.PUT, entity, Object.class);
 
-        assertEquals("", HttpStatus.METHOD_NOT_ALLOWED, response.getStatusCode());
+        assertEquals(Constants.EMPTY_STRING, HttpStatus.METHOD_NOT_ALLOWED, response.getStatusCode());
     }
 
     /**
@@ -115,10 +111,10 @@ public class UserTest {
         HttpEntity<UserDTO> entity = new HttpEntity<>(userDTO, headers);
 
         ResponseEntity response = restTemplate.exchange(
-                createURLWithPort(PATH),
-                HttpMethod.POST, entity, ValidationError.class);
+            createURLWithPort(PATH),
+            HttpMethod.POST, entity, ValidationError.class);
 
-        assertEquals("", HttpStatus.BAD_REQUEST, response.getStatusCode());
+        assertEquals(Constants.EMPTY_STRING, HttpStatus.BAD_REQUEST, response.getStatusCode());
     }
 
     /**
@@ -127,18 +123,18 @@ public class UserTest {
     @Test
     public void test2_registerUser_conflict() {
 
-        this.test1_registerUser_created();
+        test1_registerUser_created();
 
         HttpEntity<UserDTO> entity = new HttpEntity<>(userDTO, headers);
 
         ResponseEntity response = restTemplate.exchange(
-                createURLWithPort(PATH),
-                HttpMethod.POST, entity, Object.class);
+            createURLWithPort(PATH),
+            HttpMethod.POST, entity, Object.class);
 
-        assertEquals("", HttpStatus.CONFLICT, response.getStatusCode());
+        assertEquals(Constants.EMPTY_STRING, HttpStatus.CONFLICT, response.getStatusCode());
     }
 
     private String createURLWithPort(String uri) {
-        return "http://localhost:" + port + uri;
+        return Constants.SERVER_URL + port + uri;
     }
 }

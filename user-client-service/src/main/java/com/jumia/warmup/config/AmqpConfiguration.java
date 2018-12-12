@@ -1,6 +1,7 @@
 package com.jumia.warmup.config;
 
 import com.jumia.warmup.Listener.UserRegistrationListener;
+import com.jumia.warmup.util.Constants;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.amqp.core.AcknowledgeMode;
@@ -9,25 +10,15 @@ import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.FanoutExchange;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.core.TopicExchange;
-import org.springframework.amqp.rabbit.annotation.EnableRabbit;
-import org.springframework.amqp.rabbit.annotation.RabbitListenerConfigurer;
-import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.amqp.rabbit.listener.RabbitListenerContainerFactory;
-import org.springframework.amqp.rabbit.listener.RabbitListenerEndpointRegistrar;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
-import org.springframework.amqp.support.converter.MessageConverter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.messaging.converter.MappingJackson2MessageConverter;
-import org.springframework.messaging.handler.annotation.support.DefaultMessageHandlerMethodFactory;
-import org.springframework.validation.SmartValidator;
 
 /**
  * The type Amqp configuration.
@@ -35,23 +26,20 @@ import org.springframework.validation.SmartValidator;
 @Configuration
 public class AmqpConfiguration {
 
-    @Value("${rabbitmq.queue.name}")
+    @Value(Constants.QUEUE_NAME)
     private String queueName;
 
-    @Value("${rabbitmq.topic.exchange.name}")
+    @Value(Constants.TOPIC_EXCHANGE_NAME)
     private String topicExchangeName;
 
-    @Value("${rabbitmq.routing.key}")
+    @Value(Constants.ROUTING_KEY)
     private String routingKey;
 
-    @Value("${rabbitmq.deadletter.queue.name}")
+    @Value(Constants.DEAD_LETTER_QUEUE_NAME)
     private String deadletterQueueName;
 
-    @Value("${rabbitmq.deadletter.fanout.exchange.name}")
+    @Value(Constants.DEAD_LETTER_FANOUT_EXCHANGE_NAME)
     private String deadletterFanoutExchangeName;
-
-    @Autowired
-    private SmartValidator smartValidator;
 
     /**
      * Queue queue.
@@ -63,8 +51,8 @@ public class AmqpConfiguration {
 
         Map<String, Object> args = new HashMap<>();
 
-        args.put("x-dead-letter-exchange", deadletterFanoutExchangeName);
-        args.put("x-dead-letter-routing-key", deadletterQueueName);
+        args.put(Constants.X_DEAD_LETTER_EXCHANGE, deadletterFanoutExchangeName);
+        args.put(Constants.X_DEAD_LETTER_ROUTING_KEY, deadletterQueueName);
 
         return new Queue(queueName, true, false, false, args);
     }
@@ -163,7 +151,7 @@ public class AmqpConfiguration {
     @Bean
     MessageListenerAdapter listenerAdapter(final UserRegistrationListener userRegistrationListener) {
 
-        return new MessageListenerAdapter(userRegistrationListener, "onMessage");
+        return new MessageListenerAdapter(userRegistrationListener, Constants.DEFAULT_LISTENER_METHOD);
     }
 
     /**

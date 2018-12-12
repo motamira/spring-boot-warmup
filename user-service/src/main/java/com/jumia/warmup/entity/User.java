@@ -1,6 +1,8 @@
 package com.jumia.warmup.entity;
 
 
+import com.jumia.warmup.util.Constants;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -8,36 +10,22 @@ import lombok.ToString;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-import javax.validation.Valid;
-
 /**
  * The type User.
  */
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString
-@Document(collection = "users")
+@Document(collection = Constants.USERS)
 public class User {
 
-    @Field(value = "personal_details")
+    @Field(value = Constants.PERSONAL_DETAILS)
     private PersonalDetails personalDetails;
 
-    @Field(value = "account_information")
+    @Field(value = Constants.ACCOUNT_INFORMATION)
     private AccountInformation accountInformation;
 
     private Contacts contacts;
-
-    /**
-     * Instantiates a new User.
-     *
-     * @param personalDetails the personal details
-     * @param accountInformation the account information
-     * @param contacts the contacts
-     */
-    public User(PersonalDetails personalDetails, AccountInformation accountInformation, Contacts contacts) {
-        this.personalDetails = personalDetails;
-        this.accountInformation = accountInformation;
-        this.contacts = contacts;
-    }
 }

@@ -1,11 +1,11 @@
 package com.jumia.warmup.dto;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.jumia.warmup.util.Constants;
 import java.io.Serializable;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,31 +17,16 @@ import lombok.ToString;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @ToString(exclude = "password")
 public class AccountInformationDTO implements Serializable {
 
-    @NotNull(message = "Please enter username!")
-    @NotEmpty(message = "Please enter username!")
-    @Pattern(regexp = "^[a-zA-Z0-9]{4,10}$", message = "User name should be between 4 and 10 alphanumeric characters.")
+    @NotEmpty(message = Constants.ENTER_USERNAME)
+    @Pattern(regexp = Constants.USERNAME_REGEXP, message = Constants.ENTER_VALID_USERNAME)
     private String userName;
 
-    @NotNull(message = "Please enter password!")
-    @NotEmpty(message = "Please enter password!")
-    @Pattern(regexp = "^(?=.*[0-9])(?=.*[A-Z])(?=.*[!@#$%^&*+=-_])(?=\\S+$).{3,}$", message = " Password should contain at least one "
-        + "capital letter, a number and a symbol.")
+    @NotEmpty(message = Constants.ENTER_PASSWORD)
+    @Pattern(regexp = Constants.PASSWORD_REGEXP, message = Constants.ENTER_VALID_PASSWORD)
     private String password;
-
-    /**
-     * Instantiates a new Account information dto.
-     *
-     * @param userName the user name
-     * @param password the password
-     */
-    @JsonCreator
-    public AccountInformationDTO(
-        @JsonProperty("userName") final String userName,
-        @JsonProperty("password") final String password) {
-        this.userName = userName;
-        this.password = password;
-    }
 }

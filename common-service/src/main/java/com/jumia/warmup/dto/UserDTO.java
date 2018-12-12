@@ -1,10 +1,11 @@
 package com.jumia.warmup.dto;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.jumia.warmup.util.Constants;
 import java.io.Serializable;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,36 +17,20 @@ import lombok.ToString;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @ToString
 public class UserDTO implements Serializable {
 
     @Valid
-    @NotNull(message = "Please enter personal details!")
+    @NotNull(message = Constants.ENTER_PERSONAL_DETAILS)
     private PersonalDetailsDTO personalDetailsDTO;
 
     @Valid
-    @NotNull(message = "Please enter account information!")
+    @NotNull(message = Constants.ENTER_ACCOUNT_INFORMATION)
     private AccountInformationDTO accountInformationDTO;
 
     @Valid
-    @NotNull(message = "Please enter contacts!")
+    @NotNull(message = Constants.ENTER_CONTACTS)
     private ContactsDTO contactsDTO;
-
-    /**
-     * Instantiates a new User dto.
-     *
-     * @param personalDetailsDTO the personal details dto
-     * @param accountInformationDTO the account information dto
-     * @param contactsDTO the contacts dto
-     */
-    @Valid
-    @JsonCreator
-    public UserDTO(
-            @JsonProperty("personalDetailsDTO") final PersonalDetailsDTO personalDetailsDTO,
-            @JsonProperty("accountInformationDTO") final AccountInformationDTO accountInformationDTO,
-            @JsonProperty("contactsDTO") final ContactsDTO contactsDTO) {
-        this.personalDetailsDTO = personalDetailsDTO;
-        this.accountInformationDTO = accountInformationDTO;
-        this.contactsDTO = contactsDTO;
-    }
 }

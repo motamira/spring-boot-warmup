@@ -1,5 +1,7 @@
 package com.jumia.warmup.entity;
 
+import com.jumia.warmup.util.Constants;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,23 +15,13 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString
 public class AccountInformation {
 
     @Indexed(unique = true)
-    @Field(value = "user_name")
+    @Field(value = Constants.USER_NAME)
     private String userName;
 
     private String password;
-
-    /**
-     * Instantiates a new Account information.
-     *
-     * @param userName the user name
-     * @param password the password
-     */
-    public AccountInformation(String userName, String password) {
-        this.userName = userName;
-        this.password = password;
-    }
 }

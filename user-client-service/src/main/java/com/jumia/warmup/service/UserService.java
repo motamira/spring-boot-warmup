@@ -1,7 +1,7 @@
 package com.jumia.warmup.service;
 
-import com.jumia.warmup.Listener.UserRegistrationListener;
 import com.jumia.warmup.dto.UserDTO;
+import com.jumia.warmup.util.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
@@ -20,14 +18,14 @@ import org.springframework.web.client.RestTemplate;
  * The type User service.
  */
 @Service
-public class UserService implements IUserService {
+public class UserService implements UserServiceInterface {
 
     /**
      * The Logger.
      */
     static final Logger LOGGER = LoggerFactory.getLogger(UserService.class);
 
-    @Value("${user.registration.service.url}")
+    @Value(Constants.USER_REGISTRATION_SERVICE_URL)
     private String userRegistrationServiceURL;
 
     @Autowired
@@ -51,21 +49,21 @@ public class UserService implements IUserService {
             switch (exception.getStatusCode()) {
 
                 case CONFLICT:
-                    LOGGER.error("User already exist.");
+                    LOGGER.error(Constants.ERROR_USER_ALREADY_EXIST);
                     break;
                 case BAD_REQUEST:
-                    LOGGER.error("User is not valid.");
+                    LOGGER.error(Constants.ERROR_User_NOT_VALID);
                     break;
                 case INTERNAL_SERVER_ERROR:
-                    LOGGER.error("Serive not avaliable.");
+                    LOGGER.error(Constants.ERROR_SERIVE_NOT_AVALIABLE);
                     break;
                 default:
-                    LOGGER.error("Something went wrong.");
+                    LOGGER.error(Constants.ERROR_SOMETHING_WENT_WRONG);
                     break;
             }
         } catch (Exception exception) {
 
-            LOGGER.error("Something went wrong.");
+            LOGGER.error(Constants.ERROR_SOMETHING_WENT_WRONG);
         }
     }
 }

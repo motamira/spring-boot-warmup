@@ -1,5 +1,8 @@
 package com.jumia.warmup.responseEntityHandler;
 
+import com.jumia.warmup.util.Constants;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,9 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * The type Customized response entity exception handler.
  */
@@ -23,24 +23,24 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
 
     @Override
     protected ResponseEntity handleMethodArgumentNotValid(
-            MethodArgumentNotValidException ex,
-            HttpHeaders headers,
-            HttpStatus status,
-            WebRequest request) {
+        MethodArgumentNotValidException ex,
+        HttpHeaders headers,
+        HttpStatus status,
+        WebRequest request) {
 
         List<String> errors = new ArrayList<>();
 
         for (FieldError error : ex.getBindingResult().getFieldErrors()) {
-            errors.add(error.getField() + ": " + error.getDefaultMessage());
+            errors.add(error.getField() + Constants.COLON_WITH_SPACE + error.getDefaultMessage());
         }
         for (ObjectError error : ex.getBindingResult().getGlobalErrors()) {
-            errors.add(error.getObjectName() + ": " + error.getDefaultMessage());
+            errors.add(error.getObjectName() + Constants.COLON_WITH_SPACE + error.getDefaultMessage());
         }
 
         ValidationError validationError =
-                new ValidationError(HttpStatus.BAD_REQUEST, "Validation Failed", errors);
+            new ValidationError(HttpStatus.BAD_REQUEST, Constants.VALIDATION_FAILED, errors);
 
         return handleExceptionInternal(
-                ex, validationError, headers, validationError.getStatus(), request);
+            ex, validationError, headers, validationError.getStatus(), request);
     }
 }
