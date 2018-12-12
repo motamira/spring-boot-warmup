@@ -1,5 +1,12 @@
 package com.jumia.warmup.jsuserregistrationservice.exceptionHandlers;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@ToString
 public class ExceptionResponseDetail {
 
     String fieldError;
@@ -11,29 +18,5 @@ public class ExceptionResponseDetail {
     public ExceptionResponseDetail(String x, String y) {
         this.fieldError = x;
         this.defaultMessage = y;
-    }
-
-    public String getFieldError() {
-        return fieldError;
-    }
-
-    public void setFieldError(String fieldError) {
-        this.fieldError = fieldError;
-    }
-
-    public String getDefaultMessage() {
-        return defaultMessage;
-    }
-
-    public void setDefaultMessage(String defaultMessage) {
-        this.defaultMessage = defaultMessage;
-    }
-
-    @Override
-    public String toString() {
-        return "ExceptionResponseDetail{" +
-            "fieldError='" + fieldError + '\'' +
-            ", defaultMessage='" + defaultMessage + '\'' +
-            '}';
     }
 }

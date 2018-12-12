@@ -4,19 +4,25 @@ import com.jumia.warmup.jsuserregistrationclient.utils.Constants;
 import java.io.Serializable;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
+@Getter
+@Setter
+@ToString
 public class UserDTO implements Serializable {
 
     @Valid
-    @NotNull(message = Constants.ErrorMessages.EMPTY_ACCOUNT_INFO)
+    @NotNull(message = Constants.EMPTY_ACCOUNT_INFO_ERROR_MESSAGE)
     private AccountInformationDTO accountInformationDTO;
 
     @Valid
-    @NotNull(message = Constants.ErrorMessages.EMPTY_CONTACTS)
+    @NotNull(message = Constants.EMPTY_CONTACTS_ERROR_MESSAGE)
     private ContactsDTO contactsDTO;
 
     @Valid
-    @NotNull(message = Constants.ErrorMessages.EMPTY_PERSONAL_DETAILS)
+    @NotNull(message = Constants.EMPTY_PERSONAL_DETAILS_ERROR_MESSAGE)
     private PersonalDetailsDTO personalDetailsDTO;
 
     public UserDTO() {
@@ -26,38 +32,5 @@ public class UserDTO implements Serializable {
         this.accountInformationDTO = accountInformationDTO;
         this.contactsDTO = contactsDTO;
         this.personalDetailsDTO = personalDetailsDTO;
-    }
-
-    public AccountInformationDTO getAccountInformationDTO() {
-        return accountInformationDTO;
-    }
-
-    public void setAccountInformationDTO(AccountInformationDTO accountInformationDTO) {
-        this.accountInformationDTO = accountInformationDTO;
-    }
-
-    public ContactsDTO getContactsDTO() {
-        return contactsDTO;
-    }
-
-    public void setContactsDTO(ContactsDTO contactsDTO) {
-        this.contactsDTO = contactsDTO;
-    }
-
-    public PersonalDetailsDTO getPersonalDetailsDTO() {
-        return personalDetailsDTO;
-    }
-
-    public void setPersonalDetailsDTO(PersonalDetailsDTO personalDetailsDTO) {
-        this.personalDetailsDTO = personalDetailsDTO;
-    }
-
-    @Override
-    public String toString() {
-        return "UserDTO{" +
-            "accountInformationDTO=" + accountInformationDTO +
-            ", contactsDTO=" + contactsDTO +
-            ", personalDetailsDTO=" + personalDetailsDTO +
-            '}';
     }
 }

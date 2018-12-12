@@ -1,7 +1,7 @@
 package com.jumia.warmup.jsuserregistrationservice.rest;
 
 import com.jumia.warmup.jsuserregistrationservice.dtos.UserDTO;
-import com.jumia.warmup.jsuserregistrationservice.services.IUserRegistrationService;
+import com.jumia.warmup.jsuserregistrationservice.services.UserRegistrationServiceInterface;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController(value = "/api/users")
-public class UserRegistrationRest {
+public class UserRestController {
 
     @Autowired
-    IUserRegistrationService userRegistrationService;
+    UserRegistrationServiceInterface userRegistrationService;
 
     @RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.CREATED)

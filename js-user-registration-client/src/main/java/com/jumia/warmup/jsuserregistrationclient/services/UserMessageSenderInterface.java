@@ -5,7 +5,7 @@ import com.jumia.warmup.jsuserregistrationclient.dtos.UserDTO;
 /**
  * Copyright (c) 2016 - 2018, Jumia.
  */
-public interface IUserService {
+public interface UserMessageSenderInterface {
 
-    void sendUser(final UserDTO userDTO);
+    void sendUser();
 }

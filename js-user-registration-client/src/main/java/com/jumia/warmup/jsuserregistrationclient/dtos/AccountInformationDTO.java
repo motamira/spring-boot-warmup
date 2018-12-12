@@ -3,19 +3,22 @@ package com.jumia.warmup.jsuserregistrationclient.dtos;
 import com.jumia.warmup.jsuserregistrationclient.utils.Constants;
 import java.io.Serializable;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
+@Getter
+@Setter
+@ToString(exclude = "password")
 public class AccountInformationDTO implements Serializable {
 
-    @NotNull(message = Constants.ErrorMessages.EMPTY_USER_NAME)
-    @NotEmpty(message = Constants.ErrorMessages.EMPTY_USER_NAME)
-    @Pattern(regexp = Constants.Regex.USER_NAME, message = Constants.ErrorMessages.INVALID_USER_NAME)
+    @NotEmpty(message = Constants.EMPTY_USER_NAME_ERROR_MESSAGE)
+    @Pattern(regexp = Constants.USER_NAME_REGEX, message = Constants.INVALID_USER_NAME_ERROR_MESSAGE)
     private String userName;
 
-    @NotNull(message = Constants.ErrorMessages.EMPTY_PASSWORD)
-    @NotEmpty(message = Constants.ErrorMessages.EMPTY_PASSWORD)
-    @Pattern(regexp = Constants.Regex.PASSWORD, message = Constants.ErrorMessages.INVALID_PASSWORD)
+    @NotEmpty(message = Constants.EMPTY_PASSWORD_ERROR_MESSAGE)
+    @Pattern(regexp = Constants.PASSWORD_REGEX, message = Constants.INVALID_PASSWORD_ERROR_MESSAGE)
     private String password;
 
     public AccountInformationDTO() {
@@ -24,28 +27,5 @@ public class AccountInformationDTO implements Serializable {
     public AccountInformationDTO(String userName, String password) {
         this.userName = userName;
         this.password = password;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    @Override
-    public String toString() {
-        return "AccountInformationDTO{" +
-            "userName='" + userName + '\'' +
-            '}';
     }
 }

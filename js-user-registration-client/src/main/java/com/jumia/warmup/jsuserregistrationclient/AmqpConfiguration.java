@@ -1,5 +1,6 @@
 package com.jumia.warmup.jsuserregistrationclient;
 
+import com.jumia.warmup.jsuserregistrationclient.utils.Constants;
 import org.springframework.amqp.core.AcknowledgeMode;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
@@ -28,26 +29,26 @@ import org.springframework.messaging.handler.annotation.support.DefaultMessageHa
 @EnableRabbit
 public class AmqpConfiguration implements RabbitListenerConfigurer {
 
-    @Value("${spring.rabbitmq.queue}")
+    @Value(Constants.$_SPRING_RABBITMQ_QUEUE)
     private String USERS_QUEUE;
 
-    @Value("${spring.rabbitmq.exchange}")
+    @Value(Constants.$_SPRING_RABBITMQ_EXCHANGE)
     private String USERS_EXCHANGE;
 
-    @Value("${spring.rabbitmq.routing.key}")
+    @Value(Constants.$_SPRING_RABBITMQ_ROUTING_KEY)
     private String USERS_ROUTING_KEY;
 
-    @Value("${spring.rabbitmq.dead.queue}")
+    @Value(Constants.$_SPRING_RABBITMQ_DEAD_QUEUE)
     private String USERS_DEAD_QUEUE;
 
-    @Value("${spring.rabbitmq.dead.exchange}")
+    @Value(Constants.$_SPRING_RABBITMQ_DEAD_EXCHANGE)
     String USERS_DEAD_EXCHANGE;
 
     @Bean
     Queue queue() {
         return QueueBuilder.durable(USERS_QUEUE)
-            .withArgument("x-dead-letter-exchange", USERS_DEAD_EXCHANGE)
-            .withArgument("x-dead-letter-routing-key", USERS_DEAD_QUEUE)
+            .withArgument(Constants.X_DEAD_LETTER_EXCHANGE, USERS_DEAD_EXCHANGE)
+            .withArgument(Constants.X_DEAD_LETTER_ROUTING_KEY, USERS_DEAD_QUEUE)
             .build();
     }
 
@@ -64,7 +65,7 @@ public class AmqpConfiguration implements RabbitListenerConfigurer {
     @Bean
     Queue deadLetterQueue() {
         return QueueBuilder.durable(USERS_DEAD_QUEUE)
-            .withArgument("x-dead-letter-exchange", USERS_DEAD_EXCHANGE)
+            .withArgument(Constants.X_DEAD_LETTER_EXCHANGE, USERS_DEAD_EXCHANGE)
             .build();
     }
 

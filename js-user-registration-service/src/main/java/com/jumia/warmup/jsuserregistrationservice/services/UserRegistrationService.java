@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserRegistrationService implements IUserRegistrationService {
+public class UserRegistrationService implements UserRegistrationServiceInterface {
 
     static final Logger LOG = LoggerFactory.getLogger(JsUserRegistrationServiceApplication.class);
 
@@ -43,7 +43,7 @@ public class UserRegistrationService implements IUserRegistrationService {
 
                     userRepository.save(user);
 
-                    LOG.info(Constants.LOG.REGISTERED_USER + user.toString());
+                    LOG.info(Constants.REGISTERED_USER + user.toString());
 
                     return user;
                 }

@@ -4,6 +4,7 @@ import com.jumia.warmup.jsuserregistrationclient.dtos.AccountInformationDTO;
 import com.jumia.warmup.jsuserregistrationclient.dtos.ContactsDTO;
 import com.jumia.warmup.jsuserregistrationclient.dtos.PersonalDetailsDTO;
 import com.jumia.warmup.jsuserregistrationclient.dtos.UserDTO;
+import com.jumia.warmup.jsuserregistrationclient.utils.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -17,14 +18,16 @@ import org.springframework.stereotype.Service;
  */
 
 @Service
-public class UserMessageSender {
+public class UserMessageSender implements UserMessageSenderInterface {
 
     static final Logger LOG = LoggerFactory.getLogger(UserMessageSender.class);
 
-    @Value("${spring.rabbitmq.exchange}")
+    public static final int FIVE_MS = 5000;
+
+    @Value(Constants.$_SPRING_RABBITMQ_EXCHANGE)
     private String USERS_EXCHANGE;
 
-    @Value("${spring.rabbitmq.routing.key}")
+    @Value(Constants.$_SPRING_RABBITMQ_ROUTING_KEY)
     private String USERS_ROUTING_KEY;
 
     private final RabbitTemplate rabbitTemplate;
@@ -34,7 +37,7 @@ public class UserMessageSender {
         this.rabbitTemplate = rabbitTemplate;
     }
 
-    @Scheduled(fixedDelay = 5000)
+    @Scheduled(fixedDelay = FIVE_MS)
     public void sendUser() {
 
         UserDTO userDTO = new UserDTO(new AccountInformationDTO("sara&^^&^&Client", "aaZZa44@")

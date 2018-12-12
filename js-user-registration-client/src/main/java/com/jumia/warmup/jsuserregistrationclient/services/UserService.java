@@ -1,6 +1,7 @@
 package com.jumia.warmup.jsuserregistrationclient.services;
 
 import com.jumia.warmup.jsuserregistrationclient.dtos.UserDTO;
+import com.jumia.warmup.jsuserregistrationclient.utils.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +18,11 @@ import org.springframework.web.client.RestTemplate;
  * The type User service.
  */
 @Service
-public class UserService implements IUserService {
+public class UserService implements UserServiceInterface {
 
     static final Logger LOG = LoggerFactory.getLogger(UserService.class);
 
-
-    @Value("${user.registration.service.url}")
+    @Value(Constants.$_USER_REGISTRATION_SERVICE_URL)
     private String userRegistrationServiceURL;
 
     @Autowired
@@ -41,20 +41,20 @@ public class UserService implements IUserService {
                 userRegistrationServiceURL,
                 HttpMethod.POST, entity, Object.class);
 
-        } catch (
-            HttpClientErrorException exception) {
+        } catch (HttpClientErrorException exception) {
+
             switch (exception.getStatusCode()) {
 
                 case CONFLICT:
-                    LOG.info(">>>>>>>>>>>>>>>>>>>>> User Already Exists" + userDTO.toString());
+                    LOG.info(Constants.USER_ALREADY_EXISTS + userDTO.toString());
 
                     break;
                 case INTERNAL_SERVER_ERROR:
-                    LOG.info(">>>>>>>>>>>>>>>>>>>>> Internal Server Error");
+                    LOG.info(Constants.INTERNAL_SERVER_ERROR);
 
                     break;
                 default:
-                    LOG.info(">>>>>>>>>>>>>>>>>>>>> Client Server Error");
+                    LOG.info(Constants.CLIENT_SERVER_ERROR);
                     break;
             }
 

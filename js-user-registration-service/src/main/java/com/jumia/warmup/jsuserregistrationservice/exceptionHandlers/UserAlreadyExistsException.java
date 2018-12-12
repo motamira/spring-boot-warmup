@@ -9,6 +9,6 @@ public class UserAlreadyExistsException extends RuntimeException {
 
     public UserAlreadyExistsException(String message) {
 
-        super(Constants.ExceptionHandlerMessages.USER_ALREADY_EXISTS + message);
+        super(Constants.USER_ALREADY_EXISTS + message);
     }
 }

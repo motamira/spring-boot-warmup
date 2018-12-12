@@ -18,7 +18,7 @@ public class JsUserRegistrationServiceApplication {
     public static void main(String[] args) {
         SpringApplication.run(JsUserRegistrationServiceApplication.class, args);
 
-        LOG.info(Constants.LOG.JUMIA_SERVICES_IS_AWESOME);
+        LOG.info(Constants.JUMIA_SERVICES_IS_AWESOME);
     }
 
     @Bean

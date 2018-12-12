@@ -1,5 +1,6 @@
 package com.jumia.warmup.jsuserregistrationservice.entities;
 
+import com.jumia.warmup.jsuserregistrationservice.utils.Constants;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -16,7 +17,7 @@ public class AccountInformation {
     @Id
     private String id;
 
-    @Indexed(name = "user_name_index", unique = true)
+    @Indexed(name = Constants.USER_NAME_INDEX, unique = true)
     private String userName;
 
     private String password;

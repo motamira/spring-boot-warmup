@@ -20,7 +20,7 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <java.version>1.8</java.version>
 
-    <js.user.registration.client.port>8081</js.user.registration.client.port>
+    <js.user.registration.client.port>8181</js.user.registration.client.port>
 
     <rabbitmq.host>localhost</rabbitmq.host>
     <rabbitmq.port>5672</rabbitmq.port>
@@ -50,6 +50,12 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-amqp</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.4</version>
     </dependency>
 
     <dependency>

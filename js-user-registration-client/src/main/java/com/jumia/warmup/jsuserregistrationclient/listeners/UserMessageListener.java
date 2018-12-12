@@ -2,6 +2,7 @@ package com.jumia.warmup.jsuserregistrationclient.listeners;
 
 import com.jumia.warmup.jsuserregistrationclient.dtos.UserDTO;
 import com.jumia.warmup.jsuserregistrationclient.services.UserService;
+import com.jumia.warmup.jsuserregistrationclient.utils.Constants;
 import com.rabbitmq.client.Channel;
 import java.util.Set;
 import javax.validation.ConstraintViolation;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Component;
 /**
  * Copyright (c) 2016 - 2018, Jumia.
  */
+
 @Component
 public class UserMessageListener {
 
@@ -30,7 +32,7 @@ public class UserMessageListener {
     @Autowired
     private UserService userService;
 
-    @RabbitListener(queues = "${spring.rabbitmq.queue}")
+    @RabbitListener(queues = Constants.$_SPRING_RABBITMQ_QUEUE)
     public void processUserDTO(@Valid @Payload UserDTO userDTO, Channel channel, @Header(AmqpHeaders.DELIVERY_TAG) long tag) {
 
         try {
@@ -38,18 +40,18 @@ public class UserMessageListener {
 
             if (!errors.isEmpty()) {
 
-                LOG.info("Validation errors!");
+                LOG.info(Constants.VALIDATION_FAILED);
 
                 channel.basicAck(tag, false);
             }
 
-            LOG.info("================================== UserDTO Received: " + userDTO.toString());
+            LOG.info(Constants.USER_DTO_RECEIVED + userDTO.toString());
 
             userService.sendUser(userDTO);
             channel.basicAck(tag, true);
 
         } catch (Exception e) {
-            LOG.info("Channel exception");
+            LOG.info(Constants.CHANNEL_EXCEPTION);
 
         }
     }

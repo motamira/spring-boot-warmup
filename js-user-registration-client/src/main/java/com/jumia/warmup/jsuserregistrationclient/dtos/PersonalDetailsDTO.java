@@ -5,11 +5,17 @@ import java.io.Serializable;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
+@Getter
+@Setter
+@ToString
 public class PersonalDetailsDTO implements Serializable {
 
-    @NotNull(message = Constants.ErrorMessages.EMPTY_FIRST_NAME)
-    @NotEmpty(message = Constants.ErrorMessages.EMPTY_FIRST_NAME)
+    @NotNull(message = Constants.EMPTY_FIRST_NAME_ERROR_MESSAGE)
+    @NotEmpty(message = Constants.EMPTY_FIRST_NAME_ERROR_MESSAGE)
     private String firstName;
 
     private String lastName;
@@ -24,38 +30,5 @@ public class PersonalDetailsDTO implements Serializable {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    @Override
-    public String toString() {
-        return "PersonalDetailsDTO{" +
-            "firstName='" + firstName + '\'' +
-            ", lastName='" + lastName + '\'' +
-            ", age=" + age +
-            '}';
     }
 }

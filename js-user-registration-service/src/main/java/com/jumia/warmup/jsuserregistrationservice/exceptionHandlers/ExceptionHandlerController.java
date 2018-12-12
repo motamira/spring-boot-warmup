@@ -28,7 +28,7 @@ public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
             .collect(Collectors.toList());
 
         ExceptionResponse exceptionResponse = new ExceptionResponse(HttpStatus.BAD_REQUEST,
-            Constants.ExceptionHandlerMessages.VALIDATION_FAILED,
+            Constants.VALIDATION_FAILED,
             exceptionResponseDetails);
 
         return handleExceptionInternal(
